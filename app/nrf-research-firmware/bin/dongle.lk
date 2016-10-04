@@ -1,0 +1,23 @@
+-muwx
+-i bin/dongle.ihx
+-M
+-Y
+-X 0x0800
+-b HOME = 0x0000
+-b XSEG = 0x8000
+-b PSEG = 0x8000
+-b ISEG = 0x0000
+-b BSEG = 0x0000
+-k /usr/bin/../share/sdcc/lib/large
+-k /usr/share/sdcc/lib/large
+-l mcs51
+-l libsdcc
+-l libint
+-l liblong
+-l libfloat
+bin/main.rel
+bin/usb.rel
+bin/usb_desc.rel
+bin/radio.rel
+
+-e

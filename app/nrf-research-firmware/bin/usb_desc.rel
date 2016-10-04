@@ -1,0 +1,80 @@
+XH3
+H 1A areas 4 global symbols
+M usb_desc
+O -mmcs51 --model-large
+S .__.ABS. Def000000
+A _CODE size 0 flags 0 addr 0
+A RSEG size 0 flags 8 addr 0
+A RSEG0 size 0 flags 8 addr 0
+A RSEG1 size 0 flags 8 addr 0
+A REG_BANK_0 size 8 flags 4 addr 0
+A DSEG size 0 flags 0 addr 0
+A ISEG size 0 flags 0 addr 0
+A IABS size 0 flags 8 addr 0
+A BSEG size 0 flags 80 addr 0
+A PSEG size 0 flags 50 addr 0
+A XSEG size 0 flags 40 addr 0
+A XABS size 0 flags 48 addr 0
+A XISEG size 6 flags 40 addr 0
+S _device_strings Def000000
+A HOME size 0 flags 20 addr 0
+A GSINIT0 size 0 flags 20 addr 0
+A GSINIT1 size 0 flags 20 addr 0
+A GSINIT2 size 0 flags 20 addr 0
+A GSINIT3 size 0 flags 20 addr 0
+A GSINIT4 size 0 flags 20 addr 0
+A GSINIT5 size 0 flags 20 addr 0
+A GSINIT size 0 flags 20 addr 0
+A GSFINAL size 0 flags 20 addr 0
+A CSEG size 0 flags 20 addr 0
+A CONST size 4F flags 20 addr 0
+S _device_descriptor Def000000
+S _configuration_descriptor Def000012
+A XINIT size 6 flags 20 addr 0
+A CABS size 0 flags 28 addr 0
+T 00 00 00
+R 00 00 00 02
+T 00 00 00
+R 00 00 00 03
+T 00 00 00
+R 00 00 00 04
+T 00 00 00
+R 00 00 00 0C
+T 00 00 00
+R 00 00 00 0C
+T 00 00 00
+R 00 00 00 17
+T 00 00 00 12 01 00 02 FF FF FF 40 15 19 02 01 01
+R 00 00 00 17
+T 00 00 0D 00 01 02 00 01
+R 00 00 00 17
+T 00 00 12
+R 00 00 00 17
+T 00 00 12 09 02 20 00 01 01 00 80 64 09 04 00 00
+R 00 00 00 17
+T 00 00 1F 02 FF FF FF 00 07 05 81 02 40 00 00 07
+R 00 00 00 17
+T 00 00 2C 05 01 02 40 00 00
+R 00 00 00 17
+T 00 00 32
+R 00 00 00 17
+T 00 00 32 04 09 00
+R 00 00 00 17
+T 00 00 35
+R 00 00 00 17
+T 00 00 35 52 46 53 74 6F 72 6D 00
+R 00 00 00 17
+T 00 00 3D
+R 00 00 00 17
+T 00 00 3D 52 65 73 65 61 72 63 68 20 46 69 72 6D
+R 00 00 00 17
+T 00 00 4A 77 61 72 65 00
+R 00 00 00 17
+T 00 00 00
+R 00 00 00 18
+T 00 00 00 00 00 32 00 00 32
+R 00 00 00 18 F1 01 03 00 17 F1 81 06 00 17
+T 00 00 02 00 00 35 00 00 35
+R 00 00 00 18 F1 01 03 00 17 F1 81 06 00 17
+T 00 00 04 00 00 3D 00 00 3D
+R 00 00 00 18 F1 01 03 00 17 F1 81 06 00 17
