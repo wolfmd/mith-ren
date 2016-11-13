@@ -1,0 +1,146 @@
+nose.config: INFO: Ignoring files matching ['^\\.', '^_', '^setup\\.py$']
+nose.plugins.manager: DEBUG: Configuring plugins
+nose.plugins.manager: DEBUG: Plugins enabled: [<nose.plugins.capture.Capture object at 0x7f172bc3a250>, <nose.plugins.logcapture.LogCapture object at 0x7f172b9d1250>, <nose.plugins.deprecated.Deprecated object at 0x7f172b9d1310>, <nose.plugins.skip.Skip object at 0x7f172b2fc150>]
+nose.core: DEBUG: configured Config(addPaths=True, args=(), configSection='nosetests', debug='nose,nose.importer', debugLog='nose_debug', env={}, exclude=None, files=[], firstPackageWins=False, getTestCaseNamesCompat=False, ignoreFiles=[<_sre.SRE_Pattern object at 0x7f172dcdccb0>, <_sre.SRE_Pattern object at 0x7f172dc37a30>, <_sre.SRE_Pattern object at 0x7f172dd7ce70>], ignoreFilesDefaultStrings=['^\\.', '^_', '^setup\\.py$'], include=None, includeExe=False, logStream=<open file '<stderr>', mode 'w' at 0x7f172ddc31e0>, loggingConfig=None, options=<Values at 0x7f172b3047e8: {'xunit_file': 'nosetests.xml', 'enable_plugin_allmodules': None, 'multiprocess_restartworker': False, 'loggingConfig': None, 'doctestExtension': None, 'doctest_tests': None, 'enable_plugin_xunit': None, 'logcapture_clear': False, 'stopOnError': False, 'enable_plugin_id': None, 'testNames': None, 'doctestOptions': None, 'exclude': [], 'byteCompile': True, 'ignoreFiles': [], 'logcapture': True, 'addPaths': True, 'capture': True, 'logcapture_level': 'NOTSET', 'cover_xml': None, 'py3where': None, 'noSkip': False, 'enable_plugin_isolation': None, 'logcapture_filters': None, 'collect_only': None, 'failed': False, 'version': False, 'eval_attr': None, 'include': [], 'enable_plugin_profile': None, 'debugErrors': False, 'files': None, 'cover_tests': None, 'multiprocess_timeout': 10, 'testMatch': '(?:^|[\\b_\\./-])[Tt]est', 'traverseNamespace': False, 'firstPackageWins': False, 'cover_html_dir': 'cover', 'cover_branches': None, 'debugBoth': False, 'noDeprecated': False, 'cover_xml_file': 'coverage.xml', 'showPlugins': False, 'cover_erase': None, 'multiprocess_workers': 0, 'testIdFile': '.noseids', 'enable_plugin_coverage': None, 'attr': None, 'profile_sort': 'cumulative', 'doctestFixtures': None, 'logcapture_datefmt': None, 'cover_packages': None, 'verbosity': 1, 'enable_plugin_doctest': None, 'profile_stats_file': None, 'cover_inclusive': None, 'includeExe': False, 'logcapture_format': '%(name)s: %(levelname)s: %(message)s', 'debugFailures': False, 'detailedErrors': None, 'debugLog': 'nose_debug', 'doctest_result_var': None, 'cover_html': None, 'debug': 'nose,nose.importer', 'cover_min_percentage': None, 'where': None, 'profile_restrict': None}>, parser=<optparse.OptionParser instance at 0x7f172bc26b90>, parserClass=<class optparse.OptionParser at 0x7f172be65ce8>, plugins=<nose.plugins.manager.DefaultPluginManager object at 0x7f172bc2ed90>, py3where=(), runOnInit=True, srcDirs=('lib', 'src'), stopOnError=False, stream=<open file '<stderr>', mode 'w' at 0x7f172ddc31e0>, testMatch=<_sre.SRE_Pattern object at 0x7f172b9a2530>, testMatchPat='(?:^|[\\b_\\./-])[Tt]est', testNames=[], traverseNamespace=False, verbosity=1, where=(), worker=False, workingDir='/home/lain/Development/seniordesign/mithren/app')
+nose.importer: DEBUG: Add path /home/lain/Development/seniordesign/mithren/app
+nose.importer: DEBUG: Add path /home/lain/Development/seniordesign/mithren
+nose.importer: DEBUG: insert /home/lain/Development/seniordesign/mithren into sys.path
+nose.core: DEBUG: test loader is <nose.loader.TestLoader object at 0x7f172b2fc450>
+nose.core: DEBUG: defaultTest .
+nose.core: DEBUG: Test names are ['.']
+nose.core: DEBUG: createTests called with None
+nose.loader: DEBUG: load from . (None)
+nose.selector: DEBUG: Test name . resolved to file ., module None, call None
+nose.selector: DEBUG: Final resolution of test name .: file /home/lain/Development/seniordesign/mithren/app module app call None
+nose.importer: DEBUG: Import app from /home/lain/Development/seniordesign/mithren
+nose.importer: DEBUG: Add path /home/lain/Development/seniordesign/mithren
+nose.importer: DEBUG: find module part app (app) in ['/home/lain/Development/seniordesign/mithren']
+nose.loader: DEBUG: Load from module <module 'app' from '/home/lain/Development/seniordesign/mithren/app/__init__.pyc'>
+nose.loader: DEBUG: Load tests from module path /home/lain/Development/seniordesign/mithren/app?
+nose.loader: DEBUG: path: /home/lain/Development/seniordesign/mithren/app os.path.realpath(/home/lain/Development/seniordesign/mithren/app): /home/lain/Development/seniordesign/mithren/app
+nose.loader: DEBUG: load from dir /home/lain/Development/seniordesign/mithren/app
+nose.importer: DEBUG: Add path /home/lain/Development/seniordesign/mithren/app
+nose.importer: DEBUG: Add path /home/lain/Development/seniordesign/mithren
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/README.md? False
+nose.selector: DEBUG: __init__.py matches ignoreFiles pattern; skipped
+nose.selector: DEBUG: __init__.pyc matches ignoreFiles pattern; skipped
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/example.log? False
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/found.txt? False
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/logging_config.ini? False
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/mithren.py? None
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/mithrend.conf? False
+nose.selector: INFO: /home/lain/Development/seniordesign/mithren/app/mithrend.py is executable; skipped
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/mithrend.pyc? False
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/mousejack.py? None
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/mousejack.pyc? False
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/nose_debug? False
+nose.selector: DEBUG: wantDirectory /home/lain/Development/seniordesign/mithren/app/nrf-research-firmware? False
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/output.txt? False
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/supervisord.init? False
+nose.selector: DEBUG: wantDirectory /home/lain/Development/seniordesign/mithren/app/test? True
+nose.loader: DEBUG: load from /home/lain/Development/seniordesign/mithren/app/test (None)
+nose.selector: DEBUG: Test name /home/lain/Development/seniordesign/mithren/app/test resolved to file /home/lain/Development/seniordesign/mithren/app/test, module None, call None
+nose.selector: DEBUG: Final resolution of test name /home/lain/Development/seniordesign/mithren/app/test: file /home/lain/Development/seniordesign/mithren/app/test module app.test call None
+nose.importer: DEBUG: Import app.test from /home/lain/Development/seniordesign/mithren
+nose.importer: DEBUG: Add path /home/lain/Development/seniordesign/mithren
+nose.importer: DEBUG: find module part app (app) in ['/home/lain/Development/seniordesign/mithren']
+nose.importer: DEBUG: sys.modules has app as <module 'app' from '/home/lain/Development/seniordesign/mithren/app/__init__.pyc'>
+nose.importer: DEBUG: module already loaded? mod: /home/lain/Development/seniordesign/mithren/app new: /home/lain/Development/seniordesign/mithren/app
+nose.importer: DEBUG: find module part test (app.test) in ['/home/lain/Development/seniordesign/mithren/app']
+nose.loader: DEBUG: Load from module <module 'app.test' from '/home/lain/Development/seniordesign/mithren/app/test/__init__.pyc'>
+nose.selector: DEBUG: wantModule <module 'app.test' from '/home/lain/Development/seniordesign/mithren/app/test/__init__.pyc'>? True
+nose.loader: DEBUG: Load tests from module path /home/lain/Development/seniordesign/mithren/app/test?
+nose.loader: DEBUG: path: /home/lain/Development/seniordesign/mithren/app/test os.path.realpath(/home/lain/Development/seniordesign/mithren/app/test): /home/lain/Development/seniordesign/mithren/app/test
+nose.loader: DEBUG: load from dir /home/lain/Development/seniordesign/mithren/app/test
+nose.importer: DEBUG: Add path /home/lain/Development/seniordesign/mithren/app/test
+nose.importer: DEBUG: Add path /home/lain/Development/seniordesign/mithren/app
+nose.importer: DEBUG: Add path /home/lain/Development/seniordesign/mithren
+nose.selector: DEBUG: __init__.py matches ignoreFiles pattern; skipped
+nose.selector: DEBUG: __init__.pyc matches ignoreFiles pattern; skipped
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/test/test_mith-rend.pyc? False
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/test/test_mithrend.py? True
+nose.loader: DEBUG: load from /home/lain/Development/seniordesign/mithren/app/test/test_mithrend.py (None)
+nose.selector: DEBUG: Test name /home/lain/Development/seniordesign/mithren/app/test/test_mithrend.py resolved to file /home/lain/Development/seniordesign/mithren/app/test/test_mithrend.py, module None, call None
+nose.selector: DEBUG: Final resolution of test name /home/lain/Development/seniordesign/mithren/app/test/test_mithrend.py: file /home/lain/Development/seniordesign/mithren/app/test/test_mithrend.py module app.test.test_mithrend call None
+nose.importer: DEBUG: Import app.test.test_mithrend from /home/lain/Development/seniordesign/mithren
+nose.importer: DEBUG: Add path /home/lain/Development/seniordesign/mithren
+nose.importer: DEBUG: find module part app (app) in ['/home/lain/Development/seniordesign/mithren']
+nose.importer: DEBUG: sys.modules has app as <module 'app' from '/home/lain/Development/seniordesign/mithren/app/__init__.pyc'>
+nose.importer: DEBUG: module already loaded? mod: /home/lain/Development/seniordesign/mithren/app new: /home/lain/Development/seniordesign/mithren/app
+nose.importer: DEBUG: find module part test (app.test) in ['/home/lain/Development/seniordesign/mithren/app']
+nose.importer: DEBUG: sys.modules has app.test as <module 'app.test' from '/home/lain/Development/seniordesign/mithren/app/test/__init__.pyc'>
+nose.importer: DEBUG: module already loaded? mod: /home/lain/Development/seniordesign/mithren/app/test new: /home/lain/Development/seniordesign/mithren/app/test
+nose.importer: DEBUG: find module part test_mithrend (app.test.test_mithrend) in ['/home/lain/Development/seniordesign/mithren/app/test']
+nose.config: INFO: Ignoring files matching ['^\\.', '^_', '^setup\\.py$']
+nose.plugins.manager: DEBUG: Configuring plugins
+nose.plugins.manager: DEBUG: Plugins enabled: [<nose.plugins.capture.Capture object at 0x7fd7d3a77250>, <nose.plugins.logcapture.LogCapture object at 0x7fd7d380e250>, <nose.plugins.deprecated.Deprecated object at 0x7fd7d380e310>, <nose.plugins.skip.Skip object at 0x7fd7d3139150>]
+nose.core: DEBUG: configured Config(addPaths=True, args=(), configSection='nosetests', debug='nose,nose.importer', debugLog='nose_debug', env={}, exclude=None, files=[], firstPackageWins=False, getTestCaseNamesCompat=False, ignoreFiles=[<_sre.SRE_Pattern object at 0x7fd7d5b19cb0>, <_sre.SRE_Pattern object at 0x7fd7d5a74a30>, <_sre.SRE_Pattern object at 0x7fd7d5bb9e70>], ignoreFilesDefaultStrings=['^\\.', '^_', '^setup\\.py$'], include=None, includeExe=False, logStream=<open file '<stderr>', mode 'w' at 0x7fd7d5c001e0>, loggingConfig=None, options=<Values at 0x7fd7d31417e8: {'xunit_file': 'nosetests.xml', 'enable_plugin_allmodules': None, 'multiprocess_restartworker': False, 'loggingConfig': None, 'doctestExtension': None, 'doctest_tests': None, 'enable_plugin_xunit': None, 'logcapture_clear': False, 'stopOnError': False, 'enable_plugin_id': None, 'testNames': None, 'doctestOptions': None, 'exclude': [], 'byteCompile': True, 'ignoreFiles': [], 'logcapture': True, 'addPaths': True, 'capture': True, 'logcapture_level': 'NOTSET', 'cover_xml': None, 'py3where': None, 'noSkip': False, 'enable_plugin_isolation': None, 'logcapture_filters': None, 'collect_only': None, 'failed': False, 'version': False, 'eval_attr': None, 'include': [], 'enable_plugin_profile': None, 'debugErrors': False, 'files': None, 'cover_tests': None, 'multiprocess_timeout': 10, 'testMatch': '(?:^|[\\b_\\./-])[Tt]est', 'traverseNamespace': False, 'firstPackageWins': False, 'cover_html_dir': 'cover', 'cover_branches': None, 'debugBoth': False, 'noDeprecated': False, 'cover_xml_file': 'coverage.xml', 'showPlugins': False, 'cover_erase': None, 'multiprocess_workers': 0, 'testIdFile': '.noseids', 'enable_plugin_coverage': None, 'attr': None, 'profile_sort': 'cumulative', 'doctestFixtures': None, 'logcapture_datefmt': None, 'cover_packages': None, 'verbosity': 4, 'enable_plugin_doctest': None, 'profile_stats_file': None, 'cover_inclusive': None, 'includeExe': False, 'logcapture_format': '%(name)s: %(levelname)s: %(message)s', 'debugFailures': False, 'detailedErrors': None, 'debugLog': 'nose_debug', 'doctest_result_var': None, 'cover_html': None, 'debug': 'nose,nose.importer', 'cover_min_percentage': None, 'where': None, 'profile_restrict': None}>, parser=<optparse.OptionParser instance at 0x7fd7d3a63b90>, parserClass=<class optparse.OptionParser at 0x7fd7d3ca2ce8>, plugins=<nose.plugins.manager.DefaultPluginManager object at 0x7fd7d3a6bd90>, py3where=(), runOnInit=True, srcDirs=('lib', 'src'), stopOnError=False, stream=<open file '<stderr>', mode 'w' at 0x7fd7d5c001e0>, testMatch=<_sre.SRE_Pattern object at 0x7fd7d37df530>, testMatchPat='(?:^|[\\b_\\./-])[Tt]est', testNames=[], traverseNamespace=False, verbosity=4, where=(), worker=False, workingDir='/home/lain/Development/seniordesign/mithren/app')
+nose.importer: DEBUG: Add path /home/lain/Development/seniordesign/mithren/app
+nose.importer: DEBUG: Add path /home/lain/Development/seniordesign/mithren
+nose.importer: DEBUG: insert /home/lain/Development/seniordesign/mithren into sys.path
+nose.core: DEBUG: test loader is <nose.loader.TestLoader object at 0x7fd7d3139450>
+nose.core: DEBUG: defaultTest .
+nose.core: DEBUG: Test names are ['.']
+nose.core: DEBUG: createTests called with None
+nose.loader: DEBUG: load from . (None)
+nose.selector: DEBUG: Test name . resolved to file ., module None, call None
+nose.selector: DEBUG: Final resolution of test name .: file /home/lain/Development/seniordesign/mithren/app module app call None
+nose.importer: DEBUG: Import app from /home/lain/Development/seniordesign/mithren
+nose.importer: DEBUG: Add path /home/lain/Development/seniordesign/mithren
+nose.importer: DEBUG: find module part app (app) in ['/home/lain/Development/seniordesign/mithren']
+nose.loader: DEBUG: Load from module <module 'app' from '/home/lain/Development/seniordesign/mithren/app/__init__.pyc'>
+nose.loader: DEBUG: Load tests from module path /home/lain/Development/seniordesign/mithren/app?
+nose.loader: DEBUG: path: /home/lain/Development/seniordesign/mithren/app os.path.realpath(/home/lain/Development/seniordesign/mithren/app): /home/lain/Development/seniordesign/mithren/app
+nose.loader: DEBUG: load from dir /home/lain/Development/seniordesign/mithren/app
+nose.importer: DEBUG: Add path /home/lain/Development/seniordesign/mithren/app
+nose.importer: DEBUG: Add path /home/lain/Development/seniordesign/mithren
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/README.md? False
+nose.selector: DEBUG: __init__.py matches ignoreFiles pattern; skipped
+nose.selector: DEBUG: __init__.pyc matches ignoreFiles pattern; skipped
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/example.log? False
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/found.txt? False
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/logging_config.ini? False
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/mithren.py? None
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/mithrend.conf? False
+nose.selector: INFO: /home/lain/Development/seniordesign/mithren/app/mithrend.py is executable; skipped
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/mithrend.pyc? False
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/mousejack.py? None
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/mousejack.pyc? False
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/nose_debug? False
+nose.selector: DEBUG: wantDirectory /home/lain/Development/seniordesign/mithren/app/nrf-research-firmware? False
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/output.txt? False
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/supervisord.init? False
+nose.selector: DEBUG: wantDirectory /home/lain/Development/seniordesign/mithren/app/test? True
+nose.loader: DEBUG: load from /home/lain/Development/seniordesign/mithren/app/test (None)
+nose.selector: DEBUG: Test name /home/lain/Development/seniordesign/mithren/app/test resolved to file /home/lain/Development/seniordesign/mithren/app/test, module None, call None
+nose.selector: DEBUG: Final resolution of test name /home/lain/Development/seniordesign/mithren/app/test: file /home/lain/Development/seniordesign/mithren/app/test module app.test call None
+nose.importer: DEBUG: Import app.test from /home/lain/Development/seniordesign/mithren
+nose.importer: DEBUG: Add path /home/lain/Development/seniordesign/mithren
+nose.importer: DEBUG: find module part app (app) in ['/home/lain/Development/seniordesign/mithren']
+nose.importer: DEBUG: sys.modules has app as <module 'app' from '/home/lain/Development/seniordesign/mithren/app/__init__.pyc'>
+nose.importer: DEBUG: module already loaded? mod: /home/lain/Development/seniordesign/mithren/app new: /home/lain/Development/seniordesign/mithren/app
+nose.importer: DEBUG: find module part test (app.test) in ['/home/lain/Development/seniordesign/mithren/app']
+nose.loader: DEBUG: Load from module <module 'app.test' from '/home/lain/Development/seniordesign/mithren/app/test/__init__.pyc'>
+nose.selector: DEBUG: wantModule <module 'app.test' from '/home/lain/Development/seniordesign/mithren/app/test/__init__.pyc'>? True
+nose.loader: DEBUG: Load tests from module path /home/lain/Development/seniordesign/mithren/app/test?
+nose.loader: DEBUG: path: /home/lain/Development/seniordesign/mithren/app/test os.path.realpath(/home/lain/Development/seniordesign/mithren/app/test): /home/lain/Development/seniordesign/mithren/app/test
+nose.loader: DEBUG: load from dir /home/lain/Development/seniordesign/mithren/app/test
+nose.importer: DEBUG: Add path /home/lain/Development/seniordesign/mithren/app/test
+nose.importer: DEBUG: Add path /home/lain/Development/seniordesign/mithren/app
+nose.importer: DEBUG: Add path /home/lain/Development/seniordesign/mithren
+nose.selector: DEBUG: __init__.py matches ignoreFiles pattern; skipped
+nose.selector: DEBUG: __init__.pyc matches ignoreFiles pattern; skipped
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/test/test_mith-rend.pyc? False
+nose.selector: DEBUG: wantFile /home/lain/Development/seniordesign/mithren/app/test/test_mithrend.py? True
+nose.loader: DEBUG: load from /home/lain/Development/seniordesign/mithren/app/test/test_mithrend.py (None)
+nose.selector: DEBUG: Test name /home/lain/Development/seniordesign/mithren/app/test/test_mithrend.py resolved to file /home/lain/Development/seniordesign/mithren/app/test/test_mithrend.py, module None, call None
+nose.selector: DEBUG: Final resolution of test name /home/lain/Development/seniordesign/mithren/app/test/test_mithrend.py: file /home/lain/Development/seniordesign/mithren/app/test/test_mithrend.py module app.test.test_mithrend call None
+nose.importer: DEBUG: Import app.test.test_mithrend from /home/lain/Development/seniordesign/mithren
+nose.importer: DEBUG: Add path /home/lain/Development/seniordesign/mithren
+nose.importer: DEBUG: find module part app (app) in ['/home/lain/Development/seniordesign/mithren']
+nose.importer: DEBUG: sys.modules has app as <module 'app' from '/home/lain/Development/seniordesign/mithren/app/__init__.pyc'>
+nose.importer: DEBUG: module already loaded? mod: /home/lain/Development/seniordesign/mithren/app new: /home/lain/Development/seniordesign/mithren/app
+nose.importer: DEBUG: find module part test (app.test) in ['/home/lain/Development/seniordesign/mithren/app']
+nose.importer: DEBUG: sys.modules has app.test as <module 'app.test' from '/home/lain/Development/seniordesign/mithren/app/test/__init__.pyc'>
+nose.importer: DEBUG: module already loaded? mod: /home/lain/Development/seniordesign/mithren/app/test new: /home/lain/Development/seniordesign/mithren/app/test
+nose.importer: DEBUG: find module part test_mithrend (app.test.test_mithrend) in ['/home/lain/Development/seniordesign/mithren/app/test']

@@ -11,4 +11,3 @@ class Mousejack():
     def run(self):
         with open('output.txt', 'w') as f:
             subprocess.Popen(["sudo python modules/mousejack/tools/nrf24-scanner.py  --verbose"], stdout = f, stderr = f, shell=True)
-        print "yes"
