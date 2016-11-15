@@ -40,8 +40,6 @@ class Mithrend():
     #This can probbaly be placed into a class of Mithoren object or something
 
 
-    def on_terminate(self, signum, frame):
-        self.kill_now = True
 
 # class GracefulKiller:
 #   kill_now = False

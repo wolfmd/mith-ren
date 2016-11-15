@@ -16,12 +16,21 @@ class Mithorenmodule():
     def startProcess(self, command, file):
         print "Starting Process, homeboy"
 
+    # FUCK MEEEEEEEEE
     #This tooo
-    def killProcess(self, process):
-        process.kill()
-        process_list = subprocess.Popen(["ps aux | grep scanner"], stdout = PIPE, stderr=PIPE, shell=True)
-        stdout, stderr = process.communicate()
-        for process in process_list:
-            process_list = subprocess.Popen(["sudo kill -9 %s"  % process[2]], stdout = PIPE, stderr=PIPE, shell=True)
-            stdout, stderr = process.communicate()
+    def killProcess(self, process, force_process):
+        #process.kill()
+        find_process = subprocess.Popen(["pgrep -f %s" % force_process], stdout = subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+        stdout, stderr = find_process.communicate()
+        doomed_processes = stdout.split("\n")
+        print stdout
+
+        for process in doomed_processes:
+            mine_process = subprocess.Popen(["ps --pid %s" % process], stdout = subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+            stdout, stderr = mine_process.communicate()
+            print stdout
+            print process
+            print "Killing process %s" % process
+            kill_process =subprocess.Popen(["kill -9 %s"  % process], stdout = subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+            stdout, stderr = kill_process.communicate()
         print "Dead"

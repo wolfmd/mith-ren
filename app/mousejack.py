@@ -30,7 +30,7 @@ class Mousejack(mithorenmodule.Mithorenmodule):
                     with open('found.txt','a') as x:
                         x.write(line)
                     target_device = self.getTargetDeviceID(line)
-                    self.killProcess(mousejacker)
+                    self.killProcess(mousejacker, "[s]canner")
                     mousejack_follower = self.followTarget(target_device)
 
 
