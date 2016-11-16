@@ -20,28 +20,30 @@ class TestMousejack(unittest.TestCase):
 
     def test_mousejack_followTarget(self):
         self.instance.followTarget("9A:45:0A:44:47")
-        process = subprocess.Popen(["ps aux | grep [s]canner"], shell=True,
+        process = subprocess.Popen(["pgrep sniffer"], shell=True,
                            stdout=subprocess.PIPE,
                            stderr=subprocess.PIPE)
         stdout, stderr = process.communicate()
         self.assertIsNotNone(stdout)
 
     def test_mousejack_killProcess(self):
-        process = subprocess.Popen(["less output.txt"], shell=True,
-                           stdout=subprocess.PIPE,
-                           stderr=subprocess.PIPE)
-        process.communicate()
-        process = subprocess.Popen(["pgrep -f output.txt"], shell=True,
+        #Mock a daemon
+        with open('test.log', 'w') as f:
+            process = subprocess.Popen(["tail -f output.txt"], shell=True, stdout = f, stderr = f)
+        #Check a daemon
+        process = subprocess.Popen(["pgrep -f tail -f /etc/hosts"], shell=True,
                            stdout=subprocess.PIPE,
                            stderr=subprocess.PIPE)
         stdout, stderr = process.communicate()
+        self.assertIsNotNone(stdout)
         print stdout
-        self.instance.killProcess(process, "output.txt")
-        process = subprocess.Popen(["pgrep -f output.txt"], shell=True,
+        #Try to kill daemon
+        self.instance.killProcess("tail -f /etc/hosts")
+        process = subprocess.Popen(["pgrep -f tail -f /etc/hosts"], shell=True,
                            stdout=subprocess.PIPE,
                            stderr=subprocess.PIPE)
         stdout, stderr = process.communicate()
-        self.assertIsNone(stdout.replace('\n',''))
+        self.assertEqual(stdout,'')
 
 if __name__ == '__main__':
     unittest.main()
