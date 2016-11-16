@@ -27,15 +27,13 @@ class Mousejack(mithorenmodule.Mithorenmodule):
                 if not line:
                     time.sleep(0.1) # Sleep briefly
                     continue
-                test = test + 1
-                if test == 10:
-                    self.killProcess(mousejacker)
             #[2016-11-11 05:25:02.489]  80   5  9A:45:0A:44:47  85:02:48:A9:4B
                 if self.isTarget(line):
                     print line
-                    self.killProcess(mousejacker)
                     with open('found.txt','a') as x:
                         x.write(line)
+                    self.killProcess(mousejacker)
+                    time.sleep(1)
                     target_device = self.getTargetDeviceID(line)
                     mousejack_follower = self.followTarget(target_device)
 
@@ -52,5 +50,5 @@ class Mousejack(mithorenmodule.Mithorenmodule):
 
     def followTarget(self, target_device):
         with open('follow.txt', 'w') as f:
-            mousejack_follower = self.startProcess("sudo python ../modules/mousejack/tools/nrf24-sniffer.py -a %s --verbose" % target_device, f)
+            mousejack_follower = subprocess.Popen(["python", "../modules/mousejack/tools/nrf24-sniffer.py", "-a", "%s" % target_device, "--verbose"], stdout = f, stderr = f)
         return mousejack_follower
