@@ -8,57 +8,42 @@ import logging
 import signal
 import subprocess
 import yaml
-import re
 import os
-from screenutils import list_screens, Screen
 import mousejack, mithorenmodule
 
 class Mithrend():
+
     def __init__(self):
-        self.okay = "okay"
-        #signal.signal(signal.SIGINT, self.on_terminate)
-        #signal.signal(signal.SIGTERM, self.on_terminate)
+        # This is the daemon which runs each module
+        self.okay = ""
 
     def run(self):
-        logging.basicConfig(filename='example.log',level=logging.DEBUG)
+        # The primary loop of the daemon
+        logging.basicConfig(filename='mithrend.log',level=logging.DEBUG)
+        logger = logging.getLogger()
         with open("mithrend.conf", 'r') as stream:
             try:
                 config = yaml.load(stream)
-                logging.debug("Successfully loaded configuration file")
+                logger.debug("Successfully loaded configuration file")
             except yaml.YAMLError as exc:
-                logging.warning("Could not read YAML File:%s" % exc)
+                logger.warning("Could not read YAML File:%s" % exc)
 
-#Going to add decoupling eventually
         for module in config['modules']:
-            #kickOff%s
+            # Run each sniffing utility installed
             if 'mousejack' in module:
-                mousejack_instance = mousejack.Mousejack()
+                mousejack_instance = mousejack.Mousejack(logger)
                 logging.debug("Loaded mousejack module")
-                # bottlewhack = mousejack.Mousejack()
-                # bottlewhack.run()
                 mousejack_instance.capture()
-    #This can probbaly be placed into a class of Mithoren object or something
 
-
-
-# class GracefulKiller:
-#   kill_now = False
-#   def __init__(self):
-#     signal.signal(signal.SIGINT, self.exit_gracefully)
-#     signal.signal(signal.SIGTERM, self.exit_gracefully)
-#
-#   def exit_gracefully(self,signum, frame):
-#     self.kill_now = True
-
-#For app in config, send as list of classes??
-
+    def retrieve_report(self):
+        lines = []
+        return lines
 
 
 
 #TODO
-# Make sure to truncate the output file
-# Make sure to kill subprocesses...
-#
+# Deal with occaisional resource busy issue
+# Move away from using files
 #
 
 if __name__ == '__main__':

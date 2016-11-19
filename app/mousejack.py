@@ -4,6 +4,7 @@ import subprocess
 import yaml
 import re
 import os
+import sys
 import signal
 from screenutils import list_screens, Screen
 import mousejack, mithorenmodule
@@ -11,17 +12,49 @@ import mousejack, mithorenmodule
 class Mousejack(mithorenmodule.Mithorenmodule):
 
     def startProcess(self, command, file):
-        process = subprocess.Popen(["python", "%s" % command ,"--verbose"]  , stdout = file, stderr = file)
-        return process
+        try:
+            process = subprocess.Popen(["python", "%s" % command ,"--verbose"]  , stdout = file, stderr = file)
+            return process
+        except Exception as e:
+            # Man, this is ugly. Catches usb errors)
+            self.logger.warning('Had a USB issue. Killing sniffer processes: %s, force killing and retrying. Is the antenna hooked up right?' % e)
+            print e
+            sys.exit()
+            # scan_pid = subprocess.Popen([" ps -ef | grep [s]canner | awk  '{print $2}'"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+            # scan_pidout,scan_piderr = scan_pid.communicate()
+            # if scan_pidout:
+            #     subprocess.call(["/bin/kill", "-9","%s" % scan_pidout.strip("\n")])
+            # sniff_pid = subprocess.Popen([" ps -ef | grep [s]niffer | awk  '{print $2}'"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+            # sniff_pidout,sniff_piderr = sniff_pid.communicate()
+            # if sniff_pidout:
+            #     subprocess.call(["/bin/kill", "-9","%s" % sniff_pidout.strip("\n")])
+            #
+            #
+            # try:
+            #     process = subprocess.Popen(["python", "%s" % command ,"--verbose"]  , stdout = file, stderr = file)
+            #     return process
+            # except e:
+            #     self.logger.error('Things are really screwy, try replugging the antenna.')
+            #     sys.exit()
+
+
 
     def capture(self):
-        #try catch the Device not found, device busy, etc errors
 
         with open('output.txt', 'w') as f:
-            mousejacker = self.startProcess("../modules/mousejack/tools/nrf24-scanner.py",f)
+            try:
+                mousejacker = self.startProcess("../modules/mousejack/tools/nrf24-scanner.py",f)
+            except subprocess.CalledProcessError as e:
+                self.logger.warning('Received error: %s, force killing and retrying. Is the antenna hooked up right?' % e.output)
+                mousejack_follower = subprocess.Popen(["ps -A -o pid,cmd|grep [v]erbose |head -n 1 | awk '{print $1}'"], stdout = subprocess.PIPE, stderr = subprocess.PIPE, shell=True)
+                try:
+                    mousejacker = self.startProcess("../modules/mousejack/tools/nrf24-scanner.py",f)
+                except subprocess.CalledProcessError as f:
+                    self.logger.error('Received another error: %f, exiting. Please reseat antenna and restart daemon' % f.output)
+                    sys.exit()
+
         with open('output.txt', 'r') as o:
             o.seek(0,2) # Go to the end of the file
-            test = 0
             while True:
                 line = o.readline()
                 if not line:
@@ -29,7 +62,7 @@ class Mousejack(mithorenmodule.Mithorenmodule):
                     continue
             #[2016-11-11 05:25:02.489]  80   5  9A:45:0A:44:47  85:02:48:A9:4B
                 if self.isTarget(line):
-                    print line
+                    self.logger.info("Found a target: %s" % line)
                     with open('found.txt','a') as x:
                         x.write(line)
                     self.killProcess(mousejacker)
@@ -49,6 +82,35 @@ class Mousejack(mithorenmodule.Mithorenmodule):
         return target_device
 
     def followTarget(self, target_device):
+        self.logger.info("Following target %s" % target_device)
         with open('follow.txt', 'w') as f:
             mousejack_follower = subprocess.Popen(["python", "../modules/mousejack/tools/nrf24-sniffer.py", "-a", "%s" % target_device, "--verbose"], stdout = f, stderr = f)
+        # How to make this into not log files
+        with open('follow.txt', 'r') as o:
+            o.seek(0,2)
+            timeout = 6000
+            while timeout > 0:
+                timeout = timeout - 1
+                if timeout % 50 == 0:
+                    logging.debug("Timing out in %s" % timeout)
+                line = o.readline()
+                if not line:
+                    time.sleep(0.1)
+                    continue
+                if self.isTarget(line) and "Unable" not in line and "Entering" not in line:
+                    #Reset timeout
+                    timeout = 6000
+                    self.logger.info("Sniffed a packet %s" % line)
+                    packet = line
+                    try:
+                        packet = line.split(' ')[9]
+                    except:
+                        pass
+                    with open('correlation.txt','a') as x:
+                        x.write("%s : %s " % (target_device, packet))
+            #Go back to scanning
+            self.killProcess(mousejack_follower)
+            time.sleep(1)
+            self.capture()
+
         return mousejack_follower

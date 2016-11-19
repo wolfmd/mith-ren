@@ -7,10 +7,10 @@ import mousejack
 import os
 
 class Mithorenmodule():
-    def __init__(self):
+    def __init__(self, logger):
         self.hello = "yes"
         self.syre = "yes"
-
+        self.logger = logger
         # Start process#
         #stop process
 
@@ -29,4 +29,4 @@ class Mithorenmodule():
                 os.killpg(process.pid, signal.SIGKILL)
                 #Just die
                 os.kill(process.pid,9)
-        print "Dead"
+        self.logger.debug("Process killed")
