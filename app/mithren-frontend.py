@@ -1,35 +1,64 @@
+import subprocess
 #Welcome message.
-print('Please enter the number of which action you wish Mithren to perform.')
 
+print "\n======================================================================"
+print "=======================    MITH-REN    ==============================="
+print "======================================================================\n"
+print('Please enter the number of which action you wish Mithoren to perform.')
 
-# Different Functions of Mithrend.py
-print("[1]Start [2]Stop [3]Status [4]Logged Packets [5] Edit Config file")
+def first_prompt():
+    print("[1] Start")
+    print("[2] Stop")
+    # Different Functions of Mithrend.py
+    print("[3] Status")
+    print("[4] View Logged Packets")
+    print("[5] Edit Config file")
+    print("[6] Exit")
+    command = raw_input()
+    return command
 
-def startProcess(self, command, file):
+def second_prompt():
+    # Different Functions of Mithrend.py
+    print("[1] Start [2] Stop [3] Status [4] View Logged Packets [5] Edit Config file [6] Exit")
+    command = raw_input()
+    return command
+
+def startProcess():
     #Until daemonized
-      process = subprocess.Popen(["python", "mithrend.py"]  , stdout = subprocess.PIPE, stderr = subprocess.PIPE)
-      stdout, stderr = process.communicate()
+      with open('/dev/null', 'a') as f:
+          process = subprocess.Popen(["python", "mithrend.py"]  , stdout = f, stderr = f)
+      #stdout, stderr = process.communicate()
       return process
 
-command = raw_input()
-if command == "1":
-    print("Test1")
-    process = startProcess()
+command = first_prompt()
+while True:
+    if command == "1":
+        print "\nMithoren daemon started! Select 4 to view the capture log\n"
+        process = startProcess()
+        command = second_prompt()
 
-elif command == "2":
-    print("Test2")
-    if process:
-        process.kill()
+    elif command == "2":
+        print("Test2")
+        if process:
+            process.kill()
+        command = second_prompt()
 
-elif command == "3":
-    print("Put status here")
-    if process:
+    elif command == "3":
+        print("Put status here")
+        command = second_prompt()
 
-elif command == "4":
-    execfile('correlation.txt')
+    elif command == "4":
+        with open('/etc/hosts', 'r') as o:
+            o.seek(0,2) # Go to the end of the file
+            while True:
+                line = o.readline()
+                print line
+        command = second_prompt()
 
-elif command == "5":
-    execfile('edit.config')
+    elif command == "5":
+        execfile('edit.config')
+        command = second_prompt()
 
-else:
-    print('Invalid Command.')
+    else:
+        print('Invalid Command.')
+        command = second_prompt()
