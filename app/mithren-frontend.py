@@ -89,7 +89,7 @@ while True:
         command = second_prompt()
 
     elif command == "7":
-        sys.quit()
+        sys.exit()
 
     else:
         print('Invalid Command.')
