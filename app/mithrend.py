@@ -35,11 +35,6 @@ class Mithrend():
                 logging.debug("Loaded mousejack module")
                 mousejack_instance.capture()
 
-    def retrieve_report(self):
-        lines = []
-        return lines
-
-
 
 #TODO
 # Deal with occaisional resource busy issue

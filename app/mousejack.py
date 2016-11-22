@@ -20,24 +20,6 @@ class Mousejack(mithorenmodule.Mithorenmodule):
             self.logger.warning('Had a USB issue. Killing sniffer processes: %s, force killing and retrying. Is the antenna hooked up right?' % e)
             print e
             sys.exit()
-            # scan_pid = subprocess.Popen([" ps -ef | grep [s]canner | awk  '{print $2}'"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-            # scan_pidout,scan_piderr = scan_pid.communicate()
-            # if scan_pidout:
-            #     subprocess.call(["/bin/kill", "-9","%s" % scan_pidout.strip("\n")])
-            # sniff_pid = subprocess.Popen([" ps -ef | grep [s]niffer | awk  '{print $2}'"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-            # sniff_pidout,sniff_piderr = sniff_pid.communicate()
-            # if sniff_pidout:
-            #     subprocess.call(["/bin/kill", "-9","%s" % sniff_pidout.strip("\n")])
-            #
-            #
-            # try:
-            #     process = subprocess.Popen(["python", "%s" % command ,"--verbose"]  , stdout = file, stderr = file)
-            #     return process
-            # except e:
-            #     self.logger.error('Things are really screwy, try replugging the antenna.')
-            #     sys.exit()
-
-
 
     def capture(self):
 
@@ -101,13 +83,8 @@ class Mousejack(mithorenmodule.Mithorenmodule):
                     #Reset timeout
                     timeout = 6000
                     self.logger.info("Sniffed a packet %s" % line)
-                    packet = line
-                    try:
-                        packet = line.split(' ')[9]
-                    except:
-                        pass
                     with open('correlation.txt','a') as x:
-                        x.write("%s : %s " % (target_device, packet))
+                        x.write("%s : %s " % (target_device, line))
             #Go back to scanning
             self.killProcess(mousejack_follower)
             time.sleep(1)
