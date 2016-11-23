@@ -6,6 +6,8 @@
 import subprocess
 import sys
 import emailagent
+import logging
+import yaml
 
 class MithrendFrontend():
 
@@ -32,7 +34,8 @@ class MithrendFrontend():
 
     def display_prompt(self):
         # Different Functions of Mithrend.py
-        print("\n[1] Start [2] Stop [3] Status [4] View Logged Packets [5] Follow Daemon [6] Edit Config file [7] Send a Report [8] Exit")
+        print("\nMithren Menu:\n[1] Start [2] Stop [3] Status [4] View Logged Packets [5] Follow Daemon\n" \
+              "[6] Edit Config file [7] Send a Report [8] Exit")
         command = self.get_input()
         return command
 
@@ -100,10 +103,13 @@ class MithrendFrontend():
         elif command == "7":
             print "Sending email to ....."
             payload = self.gather_data_from_daemon()
-            self.email_agent.send_email(payload)
+            self.email_agent.set_message(payload)
+            self.email_agent.send_email()
 
         elif command == "8":
-            sys.quit()
+            # good advice
+            print "Remember to brush your teeth!"
+            sys.exit()
 
         else:
             print('Invalid Command.')
@@ -112,7 +118,7 @@ class MithrendFrontend():
         command = self.display_start_menu()
         while True:
             self.process_command(command)
-            command = self.second_prompt()
+            command = self.display_prompt()
 
 
 
@@ -126,14 +132,14 @@ class MithrendFrontend():
 if __name__ == '__main__':
     logging.basicConfig(filename='mithren-frontend.log',level=logging.DEBUG)
     logger = logging.getLogger()
-    with open("mithren-frontend.conf", 'r') as stream:
+    with open("mithrend.conf", 'r') as stream:
         try:
             config = yaml.load(stream)
             logger.debug("Successfully loaded configuration file")
         except yaml.YAMLError as exc:
             logger.warning("Could not read YAML File:%s" % exc)
             print "Please fix mithren-frontend.conf YAML file and restart the program"
-            sys.quit()
+            sys.exit()
 
     email_agent = emailagent.EmailAgent(logger, config)
     app = MithrendFrontend(email_agent)
@@ -141,3 +147,4 @@ if __name__ == '__main__':
 
 #//TODO
 # Make a process to follow logs
+# Perhaps make it sort of nicely and slowly present information to the end user- using ...s and now sending sleeps
