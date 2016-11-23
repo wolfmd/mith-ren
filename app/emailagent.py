@@ -6,28 +6,43 @@ from email.MIMEText import MIMEText
 #Put these here datas in a configuramacation file
 
 class EmailAgent():
-    def __init__(self):
+
+    def __init__(self, logger, config):
         self.from_addr = "mithoren@nullbrook.org"
         self.to_addr = "wolfmi13@gmail.com"
         self.subject = "Are You Experienced?"
-        # This is the daemon which runs each module
-        self.message = """From: From Mithoren <mithoren@nullbrook.org>
-                        To: To Michael Wolf <wolfmi13@gmail.com>
+        self.confg = config
+        #"""From: From Mithoren <mithoren@nullbrook.org>
+        #                To: To Michael Wolf <wolfmi13@gmail.com>
+        #                MIME-Version: 1.0
+        #                Content-type: text/html
+        #                Subject: SMTP HTML e-mail test
+        #                """
+        self.header = "No header"
+        self.message = "Report failed"
+        self.logger = logger
+
+
+    def set_message(self, message):
+        self.message = "Here: %s" % message
+
+    def set_header(self, email_name, email_address):
+        """From: From %s <%s>
+                        To: To %s <%s>
                         MIME-Version: 1.0
                         Content-type: text/html
-                        Subject: SMTP HTML e-mail test
-
-                        This is an e-mail message to be sent in HTML format
-
-                        <b>This is HTML message.</b>
-                        <h1>This is headline.</h1>
-                        """
+                        Subject: %s
+                        """ % (self.config['mithren-name'],
+                               self.config['mithren-email'],
+                               email_name,
+                               email_address,
+                               self.config['subject'])
 
     def send_email(self):
-
+        body = "%s%s" % (self.header, self.message)
         try:
            smtpObj = smtplib.SMTP('localhost')
-           smtpObj.sendmail(self.from_addr, self.to_addr, self.message)
+           smtpObj.sendmail(self.from_addr, self.to_addr, body)
            print "Successfully sent email"
         except SMTPException:
            print "Error: unable to send email"

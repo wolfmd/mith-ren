@@ -5,6 +5,7 @@
 
 import subprocess
 import sys
+import emailagent
 
 class MithrendFrontend():
 
@@ -66,6 +67,9 @@ class MithrendFrontend():
         all_read_text = ''.join(reversed(blocks))
         return '\n'.join(all_read_text.splitlines()[-total_lines_wanted:])
 
+    def gather_data_from_daemon(self):
+        return "Here ya go, boss"
+
     def process_command(self, command):
         if command == "1":
             print "\nMithoren daemon started! Select 4 to view the capture log"
@@ -87,6 +91,7 @@ class MithrendFrontend():
 
         elif command == "5":
             print "Coming soon"
+
             #infinite loop of readlines()
 
         elif command == "6":
@@ -94,7 +99,8 @@ class MithrendFrontend():
 
         elif command == "7":
             print "Sending email to ....."
-            self.email_agent.send_email()
+            payload = self.gather_data_from_daemon()
+            self.email_agent.send_email(payload)
 
         elif command == "8":
             sys.quit()
@@ -106,7 +112,7 @@ class MithrendFrontend():
         command = self.display_start_menu()
         while True:
             self.process_command(command)
-            command = second_prompt()
+            command = self.second_prompt()
 
 
 
@@ -118,7 +124,18 @@ class MithrendFrontend():
 #
 
 if __name__ == '__main__':
-    email_agent = EmailAgent()
+    logging.basicConfig(filename='mithren-frontend.log',level=logging.DEBUG)
+    logger = logging.getLogger()
+    with open("mithren-frontend.conf", 'r') as stream:
+        try:
+            config = yaml.load(stream)
+            logger.debug("Successfully loaded configuration file")
+        except yaml.YAMLError as exc:
+            logger.warning("Could not read YAML File:%s" % exc)
+            print "Please fix mithren-frontend.conf YAML file and restart the program"
+            sys.quit()
+
+    email_agent = emailagent.EmailAgent(logger, config)
     app = MithrendFrontend(email_agent)
     app.run()
 
