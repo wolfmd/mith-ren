@@ -33,13 +33,14 @@ class Mithrend():
             if 'mousejack' in module:
                 mousejack_instance = mousejack.Mousejack(logger)
                 logging.debug("Loaded mousejack module")
-                mousejack_instance.capture()
+                mousejack_instance.startProcess()
 
 
 #TODO
 # Deal with occaisional resource busy issue
 # Move away from using files
-#
+# Ooooh can I use a buffered stream???
+# Set up a database ofvulnerable devices
 
 if __name__ == '__main__':
     app = Mithrend()

@@ -11,7 +11,8 @@ import mousejack, mithorenmodule
 
 class Mousejack(mithorenmodule.Mithorenmodule):
 
-    def startProcess(self, command, file):
+    # Mousejack-specific
+    def capture(self, command, file):
         try:
             process = subprocess.Popen(["python", "%s" % command ,"--verbose"]  , stdout = file, stderr = file)
             return process
@@ -21,11 +22,13 @@ class Mousejack(mithorenmodule.Mithorenmodule):
             print e
             sys.exit()
 
-    def capture(self):
+    # Run the search
+    def startProcess(self):
+
 
         with open('output.txt', 'w') as f:
             try:
-                mousejacker = self.startProcess("../modules/mousejack/tools/nrf24-scanner.py",f)
+                mousejacker = self.capture("../modules/mousejack/tools/nrf24-scanner.py",f)
             except subprocess.CalledProcessError as e:
                 self.logger.warning('Received error: %s, force killing and retrying. Is the antenna hooked up right?' % e.output)
                 mousejack_follower = subprocess.Popen(["ps -A -o pid,cmd|grep [v]erbose |head -n 1 | awk '{print $1}'"], stdout = subprocess.PIPE, stderr = subprocess.PIPE, shell=True)
@@ -88,6 +91,6 @@ class Mousejack(mithorenmodule.Mithorenmodule):
             #Go back to scanning
             self.killProcess(mousejack_follower)
             time.sleep(1)
-            self.capture()
+            self.startProcess()
 
         return mousejack_follower

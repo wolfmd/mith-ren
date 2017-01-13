@@ -1,5 +1,7 @@
 import unittest
-import sys, os
+import sys
+import os
+import logging
 import subprocess
 
 from app import mithrend, mousejack
@@ -7,8 +9,11 @@ from app import mithrend, mousejack
 class TestMousejack(unittest.TestCase):
 
     def setUp(self):
-        self.instance = mousejack.Mousejack()
+        logging.basicConfig(filename='test-mithrend.log',level=logging.DEBUG)
+        logger = logging.getLogger()
+        self.instance = mousejack.Mousejack(logger)
         self.targetString = '[2016-11-11 05:25:02.489]  80   5  9A:45:0A:44:47  85:02:48:A9:4B'
+        #self.fakeProcess =
 
     def test_mousejack_isTarget(self):
 

@@ -17,8 +17,8 @@ class Mithorenmodule():
     def startProcess(self, command, file):
         print "Starting Process, homeboy"
 
-    # FUCK MEEEEEEEEE
-    #This tooo
+
+    #Very good and helpful
     def killProcess(self, process):
 
         process.terminate()

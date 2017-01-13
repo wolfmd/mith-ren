@@ -3,6 +3,7 @@
 # Requires: python-daemon
 #
 
+import os
 import subprocess
 import sys
 import emailagent
@@ -13,13 +14,20 @@ class MithrendFrontend():
 
     def __init__(self, email_agent):
         # This is the daemon which runs each module
-        self.okay = ""
+        self.pid = None
         self.email_agent = email_agent
 
     def display_start_menu(self):
-        print "\n======================================================================"
-        print "=======================    MITH-REN    ==============================="
-        print "======================================================================\n"
+        os.system("clear")
+        print " "
+        print "==               ,  ,,     ` `                     =="
+        print "==           '  ||  ||     , ,                     =="
+        print "== \\\/\\\/\\\ \\\ =||= ||/\\\  /'\\\ ,._-_  _-_  \\\/\\\  =="
+        print "== || || || ||  ||  || || || ||  ||   || \\\ || ||  =="
+        print "== || || || ||  ||  || || || ||  ||   ||/   || ||  =="
+        print "== \\\ \\\ \\\ \\\  \\\, \\\ |/ \\\,/   \\\,  \\\,/  \\\ \\\  =="
+        print "==             `      _/                           =="
+        print ""
         print('Please enter the number of which action you wish Mithoren to perform.')
         print("[1] Start")
         print("[2] Stop")
@@ -28,19 +36,19 @@ class MithrendFrontend():
         print("[5] Follow Daemon")
         print("[6] Edit Config file")
         print("[7] Send a Report")
-        print("[8] Exit")
+        print("[8] Exit\n\n\n\n\n")
         command = self.get_input()
         return command
 
     def display_prompt(self):
         # Different Functions of Mithrend.py
         print("\nMithren Menu:\n[1] Start [2] Stop [3] Status [4] View Logged Packets [5] Follow Daemon\n" \
-              "[6] Edit Config file [7] Send a Report [8] Exit")
+              "[6] Edit Config file [7] Send a Report [8] Exit\n\n")
         command = self.get_input()
         return command
 
     def get_input(self):
-        command = raw_input()
+        command = raw_input("> ")
         return command
 
     def tail(self, f, lines=10):
@@ -73,39 +81,59 @@ class MithrendFrontend():
     def gather_data_from_daemon(self):
         return "Here ya go, boss"
 
+    def startDaemon():
+        print "I'm starting a daemon"
+        #Stuff
+        pid = 666
+        return pid
+
+    def getDaemonPid():
+        print "I'm getting the daemon's pid"
+        pid = self.pid
+        return pid
+
     def process_command(self, command):
+        # Start Daemon
         if command == "1":
+            self.pid = startDaemon()
             print "\nMithoren daemon started! Select 4 to view the capture log"
-            process = startProcess()
 
-
+        # Stop Daemon
         elif command == "2":
             print("Test2")
             if process:
                 process.kill()
 
+        # Status of Daemon
         elif command == "3":
-            print("Put status here")
+            pid = self.getDaemonPid()
+            status = self.getDaemonStatus(pid)
+            print status
 
+        # View Log
         elif command == "4":
             with ('correlation.txt', 'r') as f:
                 recent_lines = self.tail(f, 10)
             print recent_lines
 
+        # View Log Forever
         elif command == "5":
-            print "Coming soon"
 
+            print "Coming soon"
             #infinite loop of readlines()
 
+        # Edit Config
         elif command == "6":
             print "Coming soon"
 
+        # Send Report
         elif command == "7":
             print "Sending email to ....."
             payload = self.gather_data_from_daemon()
             self.email_agent.set_message(payload)
             self.email_agent.send_email()
 
+        # Exit
         elif command == "8":
             # good advice
             print "Remember to brush your teeth!"
@@ -148,3 +176,4 @@ if __name__ == '__main__':
 #//TODO
 # Make a process to follow logs
 # Perhaps make it sort of nicely and slowly present information to the end user- using ...s and now sending sleeps
+# Verify if dongle is attached
