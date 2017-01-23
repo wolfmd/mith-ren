@@ -16,10 +16,11 @@ class Mithrend():
     def __init__(self):
         # This is the daemon which runs each module
         self.okay = ""
-
+        # FIX THIS WHEN MY INTERNET ISNT DOWN
+        self.install_location = "/usr/share/mith-ren/app/"
     def run(self):
         # The primary loop of the daemon
-        logging.basicConfig(filename='mithrend.log',level=logging.DEBUG)
+        logging.basicConfig(filename="%s/mithrend.log" % self.install_location,level=logging.DEBUG)
         logger = logging.getLogger()
         with open("mithrend.conf", 'r') as stream:
             try:
