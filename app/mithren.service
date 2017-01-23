@@ -1,0 +1,16 @@
+[Unit]
+Description=Mithoren Keyboard Vulnerability Suite
+After=syslog.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/usr/share/mith-ren/app
+ExecStart=/usr/share/mith-ren/app/mithrend.py
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
+
