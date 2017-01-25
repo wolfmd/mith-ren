@@ -159,8 +159,12 @@ class MithrendFrontend():
 #
 
 if __name__ == '__main__':
-    logging.basicConfig(filename='mithren-frontend.log',level=logging.DEBUG)
-    logger = logging.getLogger()
+    try:
+        logging.basicConfig(filename='mithren-frontend.log',level=logging.DEBUG)
+        logger = logging.getLogger()
+    except IOError as error:
+        print "Hey there, try running as root, we need some power for this baby to run"
+        sys.exit()
     with open("mithrend.conf", 'r') as stream:
         try:
             config = yaml.load(stream)
@@ -169,9 +173,7 @@ if __name__ == '__main__':
             logger.warning("Could not read YAML File:%s" % exc)
             print "Please fix mithren-frontend.conf YAML file and restart the program"
             sys.exit()
-        except IOError as error:
-            print "Hey there, try running as root, we need some power for this baby to run"
-            sys.exit()
+
 
     email_agent = emailagent.EmailAgent(logger, config)
     app = MithrendFrontend(email_agent)
