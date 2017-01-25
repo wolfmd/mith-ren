@@ -1,4 +1,5 @@
 #!/usr/bin/python
+#!/usr/bin/env python
 # This is the daemon for the mith-ren project
 # Requires: python-daemon
 #
@@ -167,6 +168,10 @@ if __name__ == '__main__':
         except yaml.YAMLError as exc:
             logger.warning("Could not read YAML File:%s" % exc)
             print "Please fix mithren-frontend.conf YAML file and restart the program"
+            sys.exit()
+        except IOError as error:
+            print "Hey there, try running as root, we need some power for this\"
+                  "baby to run"
             sys.exit()
 
     email_agent = emailagent.EmailAgent(logger, config)
