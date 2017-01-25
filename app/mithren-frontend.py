@@ -170,8 +170,7 @@ if __name__ == '__main__':
             print "Please fix mithren-frontend.conf YAML file and restart the program"
             sys.exit()
         except IOError as error:
-            print "Hey there, try running as root, we need some power for this"\
-                  "baby to run"
+            print "Hey there, try running as root, we need some power for this baby to run"
             sys.exit()
 
     email_agent = emailagent.EmailAgent(logger, config)
