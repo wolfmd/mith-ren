@@ -1,4 +1,4 @@
-#!/usr/bin/python
+/#!/usr/bin/python
 # This is the daemon for the mith-ren project
 # Requires: python-daemon
 #
