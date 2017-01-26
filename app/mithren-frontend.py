@@ -82,15 +82,27 @@ class MithrendFrontend():
     def gather_data_from_daemon(self):
         return "Here ya go, boss"
 
-    def startDaemon():
-        print "I'm starting a daemon"
-        #Stuff
-        pid = 666
-        return pid
+    def getDaemonStatus():
+
+
 
     def getDaemonPid():
         print "I'm getting the daemon's pid"
-        pid = self.pid
+        daemon_pid = "Unknown PID"
+        try:
+            daemon_pid = subprocess.Popen(["ppy", "-a", "%s" % target_device, "--verbose"], stdout = f, stderr = f)
+        except:
+            logger.debug('Could not retrieve pidfile from system')
+        return daemon_pid
+
+    def startDaemon():
+        print "I'm starting a daemon"
+        status = getDaemonStatus():
+        if status == "Running":
+            pid = getDaemonPid()
+            print "Daemon is already running: PID is %s" % pid
+            daemon = subprocess.Popen(["python", "../modules/mousejack/tools/nrf24-sniffer.py", "-a", "%s" % target_device, "--verbose"], stdout = f, stderr = f)
+        pid = getDaemonPid()
         return pid
 
     def process_command(self, command):
