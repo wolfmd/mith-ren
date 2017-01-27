@@ -82,7 +82,7 @@ class MithrendFrontend():
     def gather_data_from_daemon(self):
         return "Here ya go, boss"
 
-    def getDaemonStatus():
+    def getDaemonStatus(self):
         daemon_status = "Unknown status"
         try:
             daemon_status = subprocess.Popen(["systemctl", "is-active",  "mithren"], stdout=subprocess.PIPE, stderr= subprocess.PIPE)
@@ -93,7 +93,7 @@ class MithrendFrontend():
         return daemon_status
 
 
-    def getDaemonPid():
+    def getDaemonPid(self):
         daemon_pid = "Unknown PID"
         try:
             daemon_pid = subprocess.Popen(["systemctl", "show",  "mithren", "--property=\"MainPID\""], stdout=subprocess.PIPE, stderr= subprocess.PIPE)
@@ -103,16 +103,16 @@ class MithrendFrontend():
             logger.debug('Could not retrieve pidfile from system')
         return daemon_pid
 
-    def startDaemon():
+    def startDaemon(self):
         print "I'm starting a daemon"
-        status = getDaemonStatus()
+        status = self.getDaemonStatus()
         pid = "Unknown"
         if status == "active":
-            pid = getDaemonPid()
+            pid = self.getDaemonPid()
             print "Daemon is already running: PID is %s" % pid
         else:
             daemon = subprocess.Popen(["systemctl", "start",  "mithren"],stdout=subprocess.PIPE, stderr= subprocess.PIPE)
-            pid = getDaemonPid()
+            pid = self.getDaemonPid()
             print "Daemon started as pid %s" % pid
             logging.info('Daemon started, pid: %s')
 
