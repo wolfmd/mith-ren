@@ -83,33 +83,43 @@ class MithrendFrontend():
         return "Here ya go, boss"
 
     def getDaemonStatus():
-
+        daemon_status = "Unknown status"
+        try:
+            daemon_status = subprocess.Popen(["systemctl", "is-active",  "mithren"], stdout=subprocess.PIPE, stderr= subprocess.PIPE)
+            daemon_status, daemon_fail = daemon_status.communicate()
+            print daemon_status
+        except:
+            logger.debug('Could not retrieve pidfile from system')
+        return daemon_status
 
 
     def getDaemonPid():
-        print "I'm getting the daemon's pid"
         daemon_pid = "Unknown PID"
         try:
-            daemon_pid = subprocess.Popen(["ppy", "-a", "%s" % target_device, "--verbose"], stdout = f, stderr = f)
+            daemon_pid = subprocess.Popen(["systemctl", "show",  "mithren", "--property=\"MainPID\""], stdout=subprocess.PIPE, stderr= subprocess.PIPE)
+            daemon_pid, daemon_pid_fail = daemon_status.communicate()
+            print daemon_pid[:6]
         except:
             logger.debug('Could not retrieve pidfile from system')
         return daemon_pid
 
     def startDaemon():
         print "I'm starting a daemon"
-        status = getDaemonStatus():
-        if status == "Running":
+        status = getDaemonStatus()
+        pid = "Unknown"
+        if status == "active":
             pid = getDaemonPid()
             print "Daemon is already running: PID is %s" % pid
-            daemon = subprocess.Popen(["python", "../modules/mousejack/tools/nrf24-sniffer.py", "-a", "%s" % target_device, "--verbose"], stdout = f, stderr = f)
-        pid = getDaemonPid()
-        return pid
+        else:
+            daemon = subprocess.Popen(["systemctl", "start",  "mithren"],stdout=subprocess.PIPE, stderr= subprocess.PIPE)
+            pid = getDaemonPid()
+            print "Daemon started as pid %s" % pid
+            logging.info('Daemon started, pid: %s')
 
     def process_command(self, command):
         # Start Daemon
         if command == "1":
             self.pid = startDaemon()
-            print "\nMithoren daemon started! Select 4 to view the capture log"
 
         # Stop Daemon
         elif command == "2":
