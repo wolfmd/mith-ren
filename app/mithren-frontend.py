@@ -119,7 +119,7 @@ class MithrendFrontend():
     def process_command(self, command):
         # Start Daemon
         if command == "1":
-            self.pid = startDaemon()
+            self.pid = self.startDaemon()
 
         # Stop Daemon
         elif command == "2":
