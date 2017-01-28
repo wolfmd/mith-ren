@@ -87,7 +87,6 @@ class MithrendFrontend():
         try:
             daemon_status = subprocess.Popen(["systemctl", "is-active",  "mithren"], stdout=subprocess.PIPE, stderr= subprocess.PIPE)
             daemon_status, daemon_fail = daemon_status.communicate()
-            print daemon_status
         except:
             logger.debug('Could not retrieve pidfile from system')
         return daemon_status
@@ -96,15 +95,14 @@ class MithrendFrontend():
     def getDaemonPid(self):
         daemon_pid = "Unknown PID"
         try:
-            daemon_pid = subprocess.Popen(["systemctl", "show",  "mithren", "--property=\"MainPID\""], stdout=subprocess.PIPE, stderr= subprocess.PIPE)
-            daemon_pid, daemon_pid_fail = daemon_status.communicate()
+            daemon_pid_raw = subprocess.Popen(["systemctl", "show",  "mithren", "--property=\"MainPID\""], stdout=subprocess.PIPE, stderr= subprocess.PIPE)
+            daemon_pid, daemon_pid_fail = daemon_pid_raw.communicate()
             print daemon_pid[:6]
         except:
             logger.debug('Could not retrieve pidfile from system')
         return daemon_pid
 
     def startDaemon(self):
-        print "I'm starting a daemon"
         status = self.getDaemonStatus()
         pid = "Unknown"
         if "active" in status:
@@ -116,6 +114,15 @@ class MithrendFrontend():
             print "Daemon started as pid %s" % pid
             logging.info('Daemon started, pid: %s')
 
+    def stopDaemon(self):
+        status = self.getDaemonStatus()
+        if "active" in status:
+            daemon = subprocess.Popen(["systemctl", "stop",  "mithren"],stdout=subprocess.PIPE, stderr= subprocess.PIPE)
+            print "Daemon stopped"
+            logging.info('Daemon stopped')
+        else:
+            print "Daemon has already been already stopped"
+
     def process_command(self, command):
         # Start Daemon
         if command == "1":
@@ -123,9 +130,7 @@ class MithrendFrontend():
 
         # Stop Daemon
         elif command == "2":
-            print("Test2")
-            if process:
-                process.kill()
+            self.pid = self.stopDaemon()
 
         # Status of Daemon
         elif command == "3":
