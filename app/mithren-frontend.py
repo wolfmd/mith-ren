@@ -87,8 +87,8 @@ class MithrendFrontend():
         try:
             daemon_status = subprocess.Popen(["systemctl", "is-active",  "mithren"], stdout=subprocess.PIPE, stderr= subprocess.PIPE)
             daemon_status, daemon_fail = daemon_status.communicate()
-        except:
-            logger.debug('Could not retrieve pidfile from system')
+        except e:
+            logger.debug('Could not retrieve status from system %s' % e)
         return daemon_status
 
 
@@ -100,8 +100,8 @@ class MithrendFrontend():
             print daemon_pid
             print daemon_pid_fail
             print daemon_pid
-        except:
-            logger.debug('Could not retrieve pidfile from system')
+        except e:
+            logger.debug('Could not retrieve pidfile from system %s' % e)
         return daemon_pid
 
     def startDaemon(self):
@@ -113,6 +113,8 @@ class MithrendFrontend():
         else:
             daemon = subprocess.Popen(["systemctl", "start",  "mithren"],stdout=subprocess.PIPE, stderr= subprocess.PIPE)
             daemon_start, daemon_fail = daemon.communicate()
+            print daemon_start
+            print daemon_fail
             pid = self.getDaemonPid()
             print "Daemon started as pid %s" % pid
             logging.info('Daemon started, pid: %s')
