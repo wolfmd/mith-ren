@@ -97,7 +97,7 @@ class MithrendFrontend():
         try:
             daemon_pid_raw = subprocess.Popen(["systemctl", "show",  "mithren", "--property=\"MainPID\""], stdout=subprocess.PIPE, stderr= subprocess.PIPE)
             daemon_pid, daemon_pid_fail = daemon_pid_raw.communicate()
-            print daemon_pid[:6]
+            print daemon_pid
         except:
             logger.debug('Could not retrieve pidfile from system')
         return daemon_pid
@@ -110,6 +110,7 @@ class MithrendFrontend():
             print "Daemon is already running: PID is %s" % pid
         else:
             daemon = subprocess.Popen(["systemctl", "start",  "mithren"],stdout=subprocess.PIPE, stderr= subprocess.PIPE)
+            daemon_start, daemon_fail = daemon.communicate()
             pid = self.getDaemonPid()
             print "Daemon started as pid %s" % pid
             logging.info('Daemon started, pid: %s')
@@ -118,6 +119,7 @@ class MithrendFrontend():
         status = self.getDaemonStatus()
         if "active" in status:
             daemon = subprocess.Popen(["systemctl", "stop",  "mithren"],stdout=subprocess.PIPE, stderr= subprocess.PIPE)
+            daemon_stop, daemon_fail = daemon.communicate()
             print "Daemon stopped"
             logging.info('Daemon stopped')
         else:
@@ -134,9 +136,12 @@ class MithrendFrontend():
 
         # Status of Daemon
         elif command == "3":
-            pid = self.getDaemonPid()
-            status = self.getDaemonStatus(pid)
-            print status
+            status = self.getDaemonStatus()
+            if "active" in status:
+                pid = self.getDaemonPid()
+                print "Daemon running as process %s" % pid
+            else:
+                print "Daemon has been stopped"
 
         # View Log
         elif command == "4":
