@@ -83,19 +83,20 @@ class MithrendFrontend():
         return "Here ya go, boss"
 
     def getDaemonStatus(self):
-        daemon_status = "Unknown status"
+        daemon_status = "Unknown"
         try:
-            daemon_status = subprocess.Popen(["systemctl", "is-active",  "mithren"], stdout=subprocess.PIPE, stderr= subprocess.PIPE)
-            daemon_status, daemon_fail = daemon_status.communicate()
+            daemon = subprocess.Popen(["systemctl", "is-active",  "mithren"], stdout=subprocess.PIPE, stderr= subprocess.PIPE)
+            daemon_status, daemon_fail = daemon.communicate()
         except e:
-            logger.debug('Could not retrieve status from system %s' % e)
+            logger.debug('Could not retrieve status from system')
+        print daemon_status
         return daemon_status
 
 
     def getDaemonPid(self):
-        daemon_pid = "Unknown PID"
-        daemon_pid_raw = subprocess.Popen(["systemctl", "show",  "mithren", "--property=\"MainPID\""], stdout=subprocess.PIPE, stderr= subprocess.PIPE)
-        daemon_pid, daemon_pid_fail = daemon_pid_raw.communicate()
+        daemon_pid = "Unknown"
+        daemon = subprocess.Popen(["systemctl", "show",  "mithren", "--property=\"MainPID\""], stdout=subprocess.PIPE, stderr= subprocess.PIPE)
+        daemon_pid, daemon_pid_fail = daemon.communicate()
         print daemon_pid
         print daemon_pid_fail
         print daemon_pid
