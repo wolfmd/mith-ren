@@ -107,7 +107,7 @@ class MithrendFrontend():
         print "I'm starting a daemon"
         status = self.getDaemonStatus()
         pid = "Unknown"
-        if status == "active":
+        if "active" in status:
             pid = self.getDaemonPid()
             print "Daemon is already running: PID is %s" % pid
         else:
