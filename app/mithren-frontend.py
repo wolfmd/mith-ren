@@ -96,7 +96,7 @@ class MithrendFrontend():
         daemon_pid = "Unknown"
         daemon = subprocess.Popen(['systemctl show mithren --property="MainPID"'], shell=True, stdout=subprocess.PIPE, stderr= subprocess.PIPE)
         daemon_pid, daemon_pid_fail = daemon.communicate()
-        return daemon_pid.split[1]
+        return daemon_pid.split("=")[1]
 
     def startDaemon(self):
         status = self.getDaemonStatus()
@@ -123,6 +123,7 @@ class MithrendFrontend():
 
 
     def process_command(self, command):
+        print "\n"
         # Start Daemon
         if command == "1":
             self.pid = self.startDaemon()
