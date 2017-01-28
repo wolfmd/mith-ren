@@ -95,7 +95,7 @@ class MithrendFrontend():
 
     def getDaemonPid(self):
         daemon_pid = "Unknown"
-        daemon = subprocess.Popen(["systemctl", "show",  "mithren", "--property=\"MainPID\""], stdout=subprocess.PIPE, stderr= subprocess.PIPE)
+        daemon = subprocess.Popen(['systemctl', 'show',  'mithren', '--property="MainPID"'], stdout=subprocess.PIPE, stderr= subprocess.PIPE)
         daemon_pid, daemon_pid_fail = daemon.communicate()
         print daemon_pid
         print daemon_pid_fail
