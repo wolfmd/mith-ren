@@ -94,23 +94,17 @@ class MithrendFrontend():
 
     def getDaemonPid(self):
         daemon_pid = "Unknown PID"
-        try:
-            daemon_pid_raw = subprocess.Popen(["systemctl", "show",  "mithren", "--property=\"MainPID\""], stdout=subprocess.PIPE, stderr= subprocess.PIPE)
-            daemon_pid, daemon_pid_fail = daemon_pid_raw.communicate()
-            print daemon_pid
-            print daemon_pid_fail
-            print daemon_pid
-        except e:
-            logger.debug('Could not retrieve pidfile from system %s' % e)
+        daemon_pid_raw = subprocess.Popen(["systemctl", "show",  "mithren", "--property=\"MainPID\""], stdout=subprocess.PIPE, stderr= subprocess.PIPE)
+        daemon_pid, daemon_pid_fail = daemon_pid_raw.communicate()
+        print daemon_pid
+        print daemon_pid_fail
+        print daemon_pid
         return daemon_pid
 
     def startDaemon(self):
         status = self.getDaemonStatus()
         pid = "Unknown"
         if "active" in status:
-            pid = self.getDaemonPid()
-            print "Daemon is already running: PID is %s" % pid
-        else:
             daemon = subprocess.Popen(["systemctl", "start",  "mithren"],stdout=subprocess.PIPE, stderr= subprocess.PIPE)
             daemon_start, daemon_fail = daemon.communicate()
             print daemon_start
@@ -118,18 +112,22 @@ class MithrendFrontend():
             pid = self.getDaemonPid()
             print "Daemon started as pid %s" % pid
             logging.info('Daemon started, pid: %s')
+        else:
+            pid = self.getDaemonPid()
+            print "Daemon is already running: PID is %s" % pid
 
     def stopDaemon(self):
         status = self.getDaemonStatus()
-        if "active" in status:
+        if "inactive" in status:
+            print "Daemon has already been already stopped"
+        else:
             daemon = subprocess.Popen(["systemctl", "stop",  "mithren"],stdout=subprocess.PIPE, stderr= subprocess.PIPE)
             daemon_stop, daemon_fail = daemon.communicate()
             print daemon_stop
             print daemon_fail
             print "Daemon stopped"
             logging.info('Daemon stopped')
-        else:
-            print "Daemon has already been already stopped"
+
 
     def process_command(self, command):
         # Start Daemon
