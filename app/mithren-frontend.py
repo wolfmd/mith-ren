@@ -15,8 +15,10 @@ class MithrendFrontend():
 
     def __init__(self, email_agent):
         # This is the daemon which runs each module
-        self.pid = None
+        self.install_location = '/usr/share/mithren'
+        self.capture_file='correlation.log'
         self.email_agent = email_agent
+
 
     def display_start_menu(self):
         os.system("clear")
@@ -144,7 +146,7 @@ class MithrendFrontend():
 
         # View Log
         elif command == "4":
-            with ('correlation.txt', 'r') as f:
+            with ('%s/%s' % (self.install_location,self.capture_file), 'r') as f:
                 recent_lines = self.tail(f, 10)
             print recent_lines
 
@@ -156,6 +158,12 @@ class MithrendFrontend():
 
         # Edit Config
         elif command == "6":
+            try:
+                edit_process = subprocess.Popen(["vim", "%s/mithrend.conf" % self.install_location],stdout=subprocess.PIPE, stderr= subprocess.PIPE)
+                edit_out, edit_err = edit_process.communicate()
+            except e:
+                print "Oops, check the log"
+                logging.error('Failed to execute config edit due to %s' % e)
             print "Coming soon"
 
         # Send Report
