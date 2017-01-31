@@ -15,7 +15,7 @@ class MithrendFrontend():
 
     def __init__(self, email_agent):
         # This is the daemon which runs each module
-        self.install_location = '/usr/share/mith-ren'
+        self.install_location = '/usr/share/mith-ren/app'
         self.capture_file='correlation.log'
         self.email_agent = email_agent
 
@@ -53,33 +53,6 @@ class MithrendFrontend():
     def get_input(self):
         command = raw_input("> ")
         return command
-
-    def tail(self, f, lines=10):
-        total_lines_wanted = lines
-
-        BLOCK_SIZE = 1024
-        f.seek(0, 2)
-        block_end_byte = f.tell()
-        lines_to_go = total_lines_wanted
-        block_number = -1
-        blocks = [] # blocks of size BLOCK_SIZE, in reverse order starting
-                    # from the end of the file
-        while lines_to_go > 0 and block_end_byte > 0:
-            if (block_end_byte - BLOCK_SIZE > 0):
-                # read the last block we haven't yet read
-                f.seek(block_number*BLOCK_SIZE, 2)
-                blocks.append(f.read(BLOCK_SIZE))
-            else:
-                # file too small, start from begining
-                f.seek(0,0)
-                # only read what was not read
-                blocks.append(f.read(block_end_byte))
-            lines_found = blocks[-1].count('\n')
-            lines_to_go -= lines_found
-            block_end_byte -= BLOCK_SIZE
-            block_number -= 1
-        all_read_text = ''.join(reversed(blocks))
-        return '\n'.join(all_read_text.splitlines()[-total_lines_wanted:])
 
     def gather_data_from_daemon(self):
         return "Here ya go, boss"
@@ -157,7 +130,7 @@ class MithrendFrontend():
         # Edit Config
         elif command == "6":
             try:
-                os.system("vim %s/app/mithrend.conf" % self.install_location) ,
+                os.system("vim %s/mithrend.conf" % self.install_location) ,
             except e:
                 print "Oops, check the log"
                 logging.error('Failed to execute config edit due to %s' % e)
