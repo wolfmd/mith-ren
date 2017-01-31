@@ -159,7 +159,7 @@ class MithrendFrontend():
         # Edit Config
         elif command == "6":
             try:
-                os.system("vim %s/mithrend.conf" % self.install_location) ,
+                os.system("vim %s/app/mithrend.conf" % self.install_location) ,
             except e:
                 print "Oops, check the log"
                 logging.error('Failed to execute config edit due to %s' % e)
