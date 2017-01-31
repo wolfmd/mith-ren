@@ -15,7 +15,7 @@ class MithrendFrontend():
 
     def __init__(self, email_agent):
         # This is the daemon which runs each module
-        self.install_location = '/usr/share/mithren'
+        self.install_location = '/usr/share/mith-ren'
         self.capture_file='correlation.log'
         self.email_agent = email_agent
 
