@@ -146,9 +146,7 @@ class MithrendFrontend():
 
         # View Log
         elif command == "4":
-            with ('%s/%s' % (self.install_location,self.capture_file), 'r') as f:
-                recent_lines = self.tail(f, 10)
-            print recent_lines
+            os.system("tail %s/%s" % (self.install_location,self.capture_file))
 
         # View Log Forever
         elif command == "5":
@@ -163,7 +161,7 @@ class MithrendFrontend():
             except e:
                 print "Oops, check the log"
                 logging.error('Failed to execute config edit due to %s' % e)
-            print "Coming soon"
+            print "Make sure to restart the daemon to enable your changes"
 
         # Send Report
         elif command == "7":
