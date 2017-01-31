@@ -159,8 +159,7 @@ class MithrendFrontend():
         # Edit Config
         elif command == "6":
             try:
-                edit_process = subprocess.Popen(["vim", "%s/mithrend.conf" % self.install_location],stdout=subprocess.PIPE, stderr= subprocess.PIPE)
-                edit_out, edit_err = edit_process.communicate()
+                os.system("vim %s/mithrend.conf" % self.install_location) ,
             except e:
                 print "Oops, check the log"
                 logging.error('Failed to execute config edit due to %s' % e)
