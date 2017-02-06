@@ -58,9 +58,12 @@ class MithrendFrontend():
         pretty_data = []
         with open('%s/found.txt' % self.install_location, 'r') as f:
             for line in f.read().split('\n'):
-                device_id = line.split('  ')[-2]
-                if device_id not in pretty_data:
-                    pretty_data.append(device_id)
+                try:
+                    device_id = line.split('  ')[-2]
+                    if device_id not in pretty_data:
+                        pretty_data.append(device_id)
+                except:
+                    pass
         pretty_string = "The following devices were identified:\n"
         for device in pretty_data:
             pretty_string += "%s - Logitiech K360" % device
