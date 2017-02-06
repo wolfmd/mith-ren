@@ -49,5 +49,5 @@ class EmailAgent():
                print body
                #smtpObj.sendmail(self.from_addr, self.to_addr, body)
            print "Successfully sent email"
-        except SMTPException:
+        except smtplib.SMTPException:
             print "Error: unable to send email"
