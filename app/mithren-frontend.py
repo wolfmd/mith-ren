@@ -136,9 +136,9 @@ class MithrendFrontend():
                     tail_file = "found.txt"
                 elif sub_command == "5":
                     tail_file = "output.txt"
-                elif sub_command == "6"
+                elif sub_command == "6":
                     break
-                else
+                else:
                     print "Invalid command"
                     continue
                 os.system("tail -f %s/%s" % (self.install_location,tail_file))
