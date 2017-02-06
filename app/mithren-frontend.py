@@ -123,9 +123,25 @@ class MithrendFrontend():
 
         # View Log Forever
         elif command == "5":
-
-            print "Coming soon"
-            #infinite loop of readlines()
+            while true:
+                print("\nWhat would you like to follow?:\n[1] Daemon Log [2] Mousejack Scanner [3] Found Devices [4] Found Packets [5] Follow Devices [6] Go back")
+                sub_command = self.get_input()
+                if sub_command == "1":
+                    tail_file = "mithrend.log"
+                elif sub_command == "2":
+                    tail_file = "follow.txt"
+                elif sub_command == "3":
+                    tail_file = "correlation.txt"
+                elif sub_command == "4":
+                    tail_file = "found.txt"
+                elif sub_command == "5":
+                    tail_file = "output.txt"
+                elif sub_command == "6"
+                    break
+                else
+                    print "Invalid command"
+                    continue
+                os.system("tail -f %s/%s" % (self.install_location,tail_file))
 
         # Edit Config
         elif command == "6":
@@ -192,3 +208,4 @@ if __name__ == '__main__':
 # Make a process to follow logs
 # Perhaps make it sort of nicely and slowly present information to the end user- using ...s and now sending sleeps
 # Verify if dongle is attached
+# It would be cool if I could whip up a terminal dashboard for the log files
