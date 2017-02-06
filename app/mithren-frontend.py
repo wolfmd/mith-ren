@@ -35,7 +35,7 @@ class MithrendFrontend():
         print("[1] Start")
         print("[2] Stop")
         print("[3] Status")
-        print("[4] View Logged Packets")
+        print("[4] View Identified Devices")
         print("[5] Follow Daemon")
         print("[6] Edit Config file")
         print("[7] Send a Report")
@@ -45,7 +45,7 @@ class MithrendFrontend():
 
     def display_prompt(self):
         # Different Functions of Mithrend.py
-        print("\nMithren Menu:\n[1] Start [2] Stop [3] Status [4] View Logged Packets [5] Follow Daemon\n" \
+        print("\nMithren Menu:\n[1] Start [2] Stop [3] Status [4] View Identified Devices [5] Follow Daemon\n" \
               "[6] Edit Config file [7] Send a Report [8] Exit\n\n")
         command = self.get_input()
         return command
@@ -54,8 +54,17 @@ class MithrendFrontend():
         command = raw_input("> ")
         return command
 
-    def gather_data_from_daemon(self):
-        return "Here ya go, boss"
+    def getPrettyData(self):
+        pretty_data = []
+        with open('%s/found.txt', 'r') as f:
+            for line in f.read():
+                device_id = line.split(' ')[0]
+                if device_id not in pretty_data:
+                    pretty_data.append(device_id)
+        pretty_string = "The following devices were identified:\n"
+        for device in pretty_data:
+            pretty_string += "%s - Logitiech K360"
+        return pretty_string
 
     def getDaemonStatus(self):
         daemon_status = "Unknown"
@@ -157,7 +166,7 @@ class MithrendFrontend():
         # Send Report
         elif command == "7":
             print "Sending email to ....."
-            payload = self.gather_data_from_daemon()
+            payload = self.getPrettyData()
             self.email_agent.set_message(payload)
             self.email_agent.send_email()
 

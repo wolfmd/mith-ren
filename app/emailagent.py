@@ -9,7 +9,7 @@ class EmailAgent():
 
     def __init__(self, logger, config):
         self.from_addr = "mithoren@nullbrook.org"
-        self.to_addr = "wolfmi13@gmail.com"
+        self.to_addr = "-"
         self.subject = "Are You Experienced?"
         self.config = config
         #"""From: From Mithoren <mithoren@nullbrook.org>
