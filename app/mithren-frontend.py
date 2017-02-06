@@ -124,7 +124,7 @@ class MithrendFrontend():
         # View Log Forever
         elif command == "5":
             while True:
-                print("\n\n---------------------------------------------------\
+                print("\n---------------------------------------------------\n\
                       What would you like to follow?:\n[1] Daemon Log [2] Mousejack Scanner [3] Found Devices [4] Found Packets [5] Follow Devices [6] Go back")
                 sub_command = self.get_input()
                 if sub_command == "1":
