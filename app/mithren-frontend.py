@@ -56,7 +56,7 @@ class MithrendFrontend():
 
     def getPrettyData(self):
         pretty_data = []
-        with open('%s/found.txt', 'r') as f:
+        with open('%s/found.txt' % self.install_location, 'r') as f:
             for line in f.read():
                 device_id = line.split(' ')[0]
                 if device_id not in pretty_data:
