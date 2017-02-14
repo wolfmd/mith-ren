@@ -25,6 +25,6 @@ class DatabaseConnection():
     def getDatabase(self):
         return self.database_instance
 
-conninfo = conninfo.ConnInfo()
-database = DatabaseConnection(conninfo)
-client = database.connect()
+# conninfo = conninfo.ConnInfo()
+# database = DatabaseConnection(conninfo)
+# client = database.connect()
