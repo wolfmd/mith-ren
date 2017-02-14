@@ -32,8 +32,8 @@ class Mithrend():
         for module in config['modules']:
             # Run each sniffing utility installed
             if 'mousejack' in module:
-                conninfo = conninfo.ConnInfo()
-                database = databaseconnection.DatabaseConnection(conninfo)
+                conn = conninfo.ConnInfo()
+                database = databaseconnection.DatabaseConnection(conn)
                 mousejack_instance = mousejack.Mousejack(logger, database)
                 logging.debug("Loaded mousejack module")
                 mousejack_instance.startProcess()
