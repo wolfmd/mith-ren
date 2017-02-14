@@ -1,3 +1,4 @@
+import datetime
 import time
 import logging
 import subprocess
@@ -25,6 +26,7 @@ class Mousejack(mithorenmodule.Mithorenmodule):
     # Run the search
     def startProcess(self):
 
+        posts = self.database.posts
 
         with open('output.txt', 'w') as f:
             try:
@@ -48,6 +50,14 @@ class Mousejack(mithorenmodule.Mithorenmodule):
             #[2016-11-11 05:25:02.489]  80   5  9A:45:0A:44:47  85:02:48:A9:4B
                 if self.isTarget(line):
                     self.logger.info("Found a target: %s" % line)
+                    post = {"date" : datetime.datetime.now(),
+                            "device_id" : "00000000",
+                            "channel" : 2,
+                            "model" : "Unknown",
+                            "messages" : ["This is a message"]
+                            }
+                    post_id = posts.insert_one(post).inserted_id
+                    self.logger.info("Inserted a line with post ID %s" % post_id)
                     with open('found.txt','a') as x:
                         x.write(line)
                     self.killProcess(mousejacker)

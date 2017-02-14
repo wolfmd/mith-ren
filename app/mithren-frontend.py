@@ -3,7 +3,7 @@
 # This is the daemon for the mith-ren project
 # Requires: python-daemon
 #
-
+import datetime
 import os
 import subprocess
 import sys
@@ -64,9 +64,11 @@ class MithrendFrontend():
                         pretty_data.append(device_id)
                 except:
                     pass
-        pretty_string = "The following devices were identified:\n"
+        pretty_string = "The following devices were identified as of %s :\n \
+                        |        Time        |    Device ID  |         Device Name       | \
+                        ------------------------------------------------------------------" % datetime.datetime.now()
         for device in pretty_data:
-            pretty_string += "%s - Logitiech K360" % device
+            pretty_string += "00:00:00 %s - Logitiech K360\n" % device
         return pretty_string
 
     def getDaemonStatus(self):

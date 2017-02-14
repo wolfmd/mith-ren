@@ -5,6 +5,8 @@
 #
 import base64
 import conninfo
+from pymongo import MongoClient
+import pymongo
 
 class DatabaseConnection():
 
@@ -13,8 +15,16 @@ class DatabaseConnection():
         self.p = base64.b64decode(conn.MP)
         self.db_host = "localhost"
         self.db_name = "mithren-db"
+        self.database_instance = None
+
+    def connect(self):
+        uri = "mongodb://%s:%s@%s" % (self.u, self.p, self.db_host)
+        client = MongoClient(uri)
+        self.database_instance = client[self.db_name]
+
+    def getDatabase(self):
+        return self.database_instance
 
 conninfo = conninfo.ConnInfo()
 database = DatabaseConnection(conninfo)
-print database.u
-print database.p
+client = database.connect()

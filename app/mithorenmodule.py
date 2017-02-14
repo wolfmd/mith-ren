@@ -7,10 +7,11 @@ import mousejack
 import os
 
 class Mithorenmodule():
-    def __init__(self, logger):
+    def __init__(self, logger, database):
         self.hello = "yes"
         self.syre = "yes"
         self.logger = logger
+        self.database = database
         # Start process#
         #stop process
 
