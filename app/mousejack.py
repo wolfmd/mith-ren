@@ -25,7 +25,7 @@ class Mousejack(mithorenmodule.Mithorenmodule):
 
     # Run the search
     def startProcess(self):
-        posts = database.posts
+        posts = self.database.posts
 
         with open('output.txt', 'w') as f:
             try:
