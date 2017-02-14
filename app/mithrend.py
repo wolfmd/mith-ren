@@ -9,7 +9,7 @@ import signal
 import subprocess
 import yaml
 import os
-import mousejack, mithorenmodule, databaseconnection
+import mousejack, mithorenmodule, databaseconnection, conninfo
 
 class Mithrend():
 
@@ -32,7 +32,8 @@ class Mithrend():
         for module in config['modules']:
             # Run each sniffing utility installed
             if 'mousejack' in module:
-                database = databaseconnection.DatabaseConnection()
+                conninfo = conninfo.ConnInfo()
+                database = databaseconnection.DatabaseConnection(conninfo)
                 mousejack_instance = mousejack.Mousejack(logger, database)
                 logging.debug("Loaded mousejack module")
                 mousejack_instance.startProcess()

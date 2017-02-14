@@ -10,7 +10,7 @@ import pymongo
 
 class DatabaseConnection():
 
-    def __init__(self):
+    def __init__(self, conn):
         self.u = base64.b64decode(conn.MU)
         self.p = base64.b64decode(conn.MP)
         self.db_host = "localhost"
@@ -26,5 +26,5 @@ class DatabaseConnection():
         return self.database_instance
 
 conninfo = conninfo.ConnInfo()
-database = DatabaseConnection()
+database = DatabaseConnection(conninfo)
 client = database.connect()
