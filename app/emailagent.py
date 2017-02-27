@@ -8,7 +8,7 @@ from email.MIMEText import MIMEText
 class EmailAgent():
 
     def __init__(self, logger, config):
-        self.from_addr = "mithoren@nullbrook.org"
+        self.from_addr = "mithoren"
         self.to_addr = "-"
         self.subject = "Are You Experienced?"
         self.config = config
@@ -47,7 +47,7 @@ class EmailAgent():
                self.set_header(recipient['email-name'], recipient['email-address'])
                body = "%s%s" % (self.header, self.message)
                print body
-               #smtpObj.sendmail(self.from_addr, self.to_addr, body)
+               smtpObj.sendmail(self.from_addr, self.to_addr, body)
            print "Successfully sent email"
         except smtplib.SMTPException:
             print "Error: unable to send email"
