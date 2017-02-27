@@ -41,14 +41,10 @@ class EmailAgent():
                                self.config['subject'])
 
     def send_email(self):
-        try:
-           smtpObj = smtplib.SMTP('localhost')
-           for recipient in self.config['receiver-emails']:
-               self.set_header(recipient['email-name'], recipient['email-address'])
-               body = "%s%s" % (self.header, self.message)
-               print body
-               smtpObj.sendmail(self.from_addr, self.to_addr, body)
-           print "Successfully sent email"
-       except smtplib.SMTPException as e:
-           print e
-           print "Error: unable to send email"
+        smtpObj = smtplib.SMTP('localhost')
+        for recipient in self.config['receiver-emails']:
+            self.set_header(recipient['email-name'], recipient['email-address'])
+            body = "%s%s" % (self.header, self.message)
+            print body
+            smtpObj.sendmail(self.from_addr, self.to_addr, body)
+        print "Successfully sent email"
