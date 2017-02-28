@@ -29,7 +29,7 @@ class EmailAgent():
         self.message = "Here: %s" % message
 
     def set_header(self, email_name, email_address):
-        self.header = "From: %s\r\nTo: %s\r\n\r\nSubject: %s\r\n" % (self.config['mithren-email'],
+        self.header = "From: %s\r\nTo: %s\r\nSubject: %s\r\n" % (self.config['mithren-email'],
                                email_address,
                                self.config['subject'])
 
