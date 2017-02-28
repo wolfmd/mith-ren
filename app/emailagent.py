@@ -29,7 +29,7 @@ class EmailAgent():
         self.message = "Here: %s" % message
 
     def set_header(self, email_name, email_address):
-        self.header = "From: %s\r\nTo: %s\r\nSubject: %s\r\n" % (self.config['mithren-email'],
+        self.header = "From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n" % (self.config['mithren-email'],
                                email_address,
                                self.config['subject'])
 
@@ -38,8 +38,5 @@ class EmailAgent():
         for recipient in self.config['receiver-emails']:
             self.set_header(recipient['email-name'], recipient['email-address'])
             body = "%s%s" % (self.header, self.message)
-            print body
-            print self.config['mithren-email']
-            print recipient['email-address']
             smtpObj.sendmail(self.config['mithren-email'], recipient['email-address'], body)
         print "Successfully sent email"
