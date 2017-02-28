@@ -46,5 +46,7 @@ class EmailAgent():
             self.set_header(recipient['email-name'], recipient['email-address'])
             body = "%s%s" % (self.header, self.message)
             print body
+            print self.config['mithren-email']
+            print recipient['email-address']
             smtpObj.sendmail(self.config['mithren-email'], recipient['email-address'], body)
         print "Successfully sent email"
