@@ -29,8 +29,8 @@ class EmailAgent():
         self.message = "Here: %s" % message
 
     def set_header(self, email_name, email_address):
-        self.header = """From: From %s <%s>
-                        To: To %s <%s>
+        self.header = """From: %s <%s>
+                        To: %s <%s>
                         MIME-Version: 1.0
                         Content-type: text/html
                         Subject: %s
