@@ -16,7 +16,7 @@ class Mousejack(mithorenmodule.Mithorenmodule):
         mfg_string = id.split(':')[0]
         if "5A" in mfg_string:
             mfg = "Dell"
-        else if "2D" in mfg_string:
+        elif "2D" in mfg_string:
             mfg = "Logitech"
         else:
             mfg = "Unknown"
