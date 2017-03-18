@@ -202,7 +202,7 @@ class MithrendFrontend():
             sub_command = self.get_input()
             if sub_command == "1":
                 payload = json.dumps(self.pullRawPosts)
-            elif sub_command == "2"
+            elif sub_command == "2":
                 payload = self.getPrettyData()
             emailers = ""
             emailaddrs = ""
