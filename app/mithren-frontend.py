@@ -75,14 +75,12 @@ class MithrendFrontend():
                 mfg = "Logitech"
                 model = "K630"
             message = post['messages'][0]
-            entries.append("%s       %s         %s  %s" % ( timestamp, did, mfg, model))
+            entries.append("   %s       %s      %s  %s\n" % ( timestamp, did, mfg, model))
         return entries
 
     def getPrettyData(self):
         entries = self.pullPosts()
-        pretty_string = """The following devices were identified as of %s :\n
-        |        Time        |    Device ID  |         Device Name        |
-        \n------------------------------------------------------------------""" % datetime.datetime.now()
+        pretty_string = """The following devices were identified as of %s:\n|        Time        |    Device ID  |         Device Name        |\n------------------------------------------------------------------""" % datetime.datetime.now()
         for entry in entries:
             pretty_string += "%s" % entry
         return pretty_string
