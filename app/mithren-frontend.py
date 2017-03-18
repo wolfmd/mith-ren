@@ -181,7 +181,7 @@ class MithrendFrontend():
         elif command == "7":
             emailers = ""
             emailaddrs = ""
-            for email in self.config['receiver-emails']
+            for email in self.config['receiver-emails']:
                 emailers += "%s, " % email['email-name']
                 emailaddrs += "%s, " % email['email-address']
             print "Sending email to %s %s" % ( emailers[:-2], emailaddrs[:-2] )
