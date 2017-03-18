@@ -26,7 +26,7 @@ class EmailAgent():
         return self.config
 
     def set_message(self, message):
-        self.message = "Here: %s" % message
+        self.message = message
 
     def set_header(self, email_name, email_address):
         self.header = "From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n" % (self.config['mithren-email'],
