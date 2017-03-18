@@ -55,7 +55,7 @@ class MithrendFrontend():
         command = raw_input("> ")
         return command
 
-    def getPrettyData(self):
+    def pullPosts(self):
         conn = conninfo.ConnInfo()
         database_connection = databaseconnection.DatabaseConnection(conn)
         database_connection.connect()
@@ -75,7 +75,11 @@ class MithrendFrontend():
                 mfg = "Logitech"
                 model = "K630"
             message = post['messages'][0]
-            entries.append("%s       %s         %s  %s") % ( timestamp, did, mfg, model)
+            entries.append("%s       %s         %s  %s" % ( timestamp, did, mfg, model))
+        return entries
+
+    def getPrettyData(self):
+        entries = pullPosts()
         pretty_string = "The following devices were identified as of %s :\n \
                         |        Time        |    Device ID  |         Device Name       | \
                         ------------------------------------------------------------------" % datetime.datetime.now()
@@ -84,21 +88,12 @@ class MithrendFrontend():
         return pretty_string
 
     def getHTMLPrettyData(self):
-            conn = conninfo.ConnInfo()
-            database_connection = databaseconnection.DatabaseConnection(conn)
-            database_connection.connect()
-            database = database_connection.getDatabase()
-            posts = database.posts
-            pretty_data = []
-
-            for post in posts.find():
-                pretty_data.append(post)
-            pretty_string = "The following devices were identified as of %s :\n \
-                            |        Time        |    Device ID  |         Device Name       | \
-                            ------------------------------------------------------------------" % datetime.datetime.now()
-            for device in pretty_data:
-                pretty_string += "%s" % device
-            return pretty_string
+        pretty_string = "The following devices were identified as of %s :\n \
+                        |        Time        |    Device ID  |         Device Name       | \
+                        ------------------------------------------------------------------" % datetime.datetime.now()
+        for device in pretty_data:
+            pretty_string += "%s" % device
+        return pretty_string
 
     def getDaemonStatus(self):
         daemon_status = "Unknown"
