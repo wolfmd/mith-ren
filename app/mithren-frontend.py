@@ -13,11 +13,12 @@ import yaml
 
 class MithrendFrontend():
 
-    def __init__(self, email_agent):
+    def __init__(self, email_agent, config):
         # This is the daemon which runs each module
         self.install_location = '/usr/share/mith-ren/app'
         self.capture_file='correlation.txt'
         self.email_agent = email_agent
+        self.config = config
 
 
     def display_start_menu(self):
@@ -178,7 +179,7 @@ class MithrendFrontend():
 
         # Send Report
         elif command == "7":
-            print "Sending email to ....."
+            print "Sending email to %s %s" % ( self.config['receiver-emails']['email-name'], self.config['receiver-emails']['email-address'] )
             payload = self.getPrettyData()
             self.email_agent.set_message(payload)
             self.email_agent.send_email()
@@ -225,7 +226,7 @@ if __name__ == '__main__':
 
 
     email_agent = emailagent.EmailAgent(logger, config)
-    app = MithrendFrontend(email_agent)
+    app = MithrendFrontend(email_agent, config)
     app.run()
 
 #//TODO
