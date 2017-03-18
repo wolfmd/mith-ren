@@ -74,7 +74,7 @@ class MithrendFrontend():
             except:
                 mfg = "Logitech"
                 model = "K630"
-            message = post['message'][0]
+            message = post['messages'][0]
             entries.append("%s       %s         %s  %s") % ( timestamp, did, mfg, model)
         pretty_string = "The following devices were identified as of %s :\n \
                         |        Time        |    Device ID  |         Device Name       | \
