@@ -179,7 +179,12 @@ class MithrendFrontend():
 
         # Send Report
         elif command == "7":
-            print "Sending email to %s %s" % ( self.config['receiver-emails']['email-name'], self.config['receiver-emails']['email-address'] )
+            emailers = ""
+            emailaddrs = ""
+            for email in self.config['receiver-emails']
+                emailers += "%s, " % email['email-name']
+                emailaddrs += "%s, " % email['email-address']
+            print "Sending email to %s %s" % ( emailers[:-2], emailaddrs[:-2] )
             payload = self.getPrettyData()
             self.email_agent.set_message(payload)
             self.email_agent.send_email()
