@@ -61,24 +61,40 @@ class MithrendFrontend():
         database_connection.connect()
         database = database_connection.getDatabase()
         posts = database.posts
-        pretty_data = []
-        # with open('%s/found.txt' % self.install_location, 'r') as f:
-        #     for line in f.read().split('\n'):
-        #         try:
-        #             device_id = line.split('  ')[-2]
-        #             if device_id not in pretty_data:
-        #                 pretty_data.append(device_id)
-        #         except:
-        #             pass
+        pretty_data = posts.find()
+        entries = []
 
-        for post in posts.find():
-            pretty_data.append(post)
+        for post in pretty_data:
+            timestamp = post['date']
+            did = post['device_id']
+            channel = post['channel']
+            mfg = post['manufacturer']
+            model = post['model']
+            message = post['message'][0]
+            entries.append("%s       %s         %s  %s") % ( timestamp, did, mfg, model)
         pretty_string = "The following devices were identified as of %s :\n \
                         |        Time        |    Device ID  |         Device Name       | \
                         ------------------------------------------------------------------" % datetime.datetime.now()
-        for device in pretty_data:
-            pretty_string += "%s" % device
+        for entry in entries:
+            pretty_string += "%s" % entry
         return pretty_string
+
+    def getHTMLPrettyData(self):
+            conn = conninfo.ConnInfo()
+            database_connection = databaseconnection.DatabaseConnection(conn)
+            database_connection.connect()
+            database = database_connection.getDatabase()
+            posts = database.posts
+            pretty_data = []
+
+            for post in posts.find():
+                pretty_data.append(post)
+            pretty_string = "The following devices were identified as of %s :\n \
+                            |        Time        |    Device ID  |         Device Name       | \
+                            ------------------------------------------------------------------" % datetime.datetime.now()
+            for device in pretty_data:
+                pretty_string += "%s" % device
+            return pretty_string
 
     def getDaemonStatus(self):
         daemon_status = "Unknown"
@@ -142,7 +158,7 @@ class MithrendFrontend():
 
         # View Log
         elif command == "4":
-            os.system("tail %s/%s" % (self.install_location,self.capture_file))
+            print self.getPrettyData()
 
         # View Log Forever
         elif command == "5":
@@ -185,7 +201,7 @@ class MithrendFrontend():
                 emailers += "%s, " % email['email-name']
                 emailaddrs += "%s, " % email['email-address']
             print "Sending email to %s %s" % ( emailers[:-2], emailaddrs[:-2] )
-            payload = self.getPrettyData()
+            payload = self.getHTMLPrettyData()
             self.email_agent.set_message(payload)
             self.email_agent.send_email()
 
