@@ -7,7 +7,7 @@ import datetime
 import os
 import subprocess
 import sys
-import emailagent
+import emailagent, databaseconnection, conninfo
 import logging
 import yaml
 
@@ -55,20 +55,28 @@ class MithrendFrontend():
         return command
 
     def getPrettyData(self):
+        conn = conninfo.ConnInfo()
+        database_connection = databaseconnection.DatabaseConnection(conn)
+        database_connection.connect()
+        database = database_connection.getDatabase()
+        posts = database.posts
         pretty_data = []
-        with open('%s/found.txt' % self.install_location, 'r') as f:
-            for line in f.read().split('\n'):
-                try:
-                    device_id = line.split('  ')[-2]
-                    if device_id not in pretty_data:
-                        pretty_data.append(device_id)
-                except:
-                    pass
+        # with open('%s/found.txt' % self.install_location, 'r') as f:
+        #     for line in f.read().split('\n'):
+        #         try:
+        #             device_id = line.split('  ')[-2]
+        #             if device_id not in pretty_data:
+        #                 pretty_data.append(device_id)
+        #         except:
+        #             pass
+
+        for post in posts.find():
+            pretty_data.append(post)
         pretty_string = "The following devices were identified as of %s :\n \
                         |        Time        |    Device ID  |         Device Name       | \
                         ------------------------------------------------------------------" % datetime.datetime.now()
         for device in pretty_data:
-            pretty_string += "00:00:00 %s - Logitiech K360\n" % device
+            pretty_string += "%s" % device
         return pretty_string
 
     def getDaemonStatus(self):
