@@ -63,10 +63,13 @@ class MithrendFrontend():
         database = database_connection.getDatabase()
         posts = database.posts
         raw_posts = posts.find()
-        return raw_posts
+        less_raw_posts = []
+        for post in raw_posts
+            less_raw_posts.append(post)
+        return raw_posts, less_raw_posts
 
     def pullPosts(self):
-        raw_posts = self.pullRawPosts()
+        raw_posts, nothing = self.pullRawPosts()
         entries = []
 
         for post in raw_posts:
@@ -202,7 +205,8 @@ class MithrendFrontend():
             "Which format would you prefer?:\n[1] JSON [2] HTML ")
             sub_command = self.get_input()
             if sub_command == "1":
-                payload = json.dumps(self.pullRawPosts())
+                raw_posts, less_raw_posts = self.pullRawPosts()
+                payload = json.dumps(less_raw_posts)
             elif sub_command == "2":
                 payload = self.getPrettyData()
             emailers = ""
