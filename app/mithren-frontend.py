@@ -80,7 +80,7 @@ class MithrendFrontend():
 
     def getPrettyData(self):
         entries = self.pullPosts()
-        pretty_string = """The following devices were identified as of %s:\n|             Time            |    Device ID   |           Device Name           |\n------------------------------------------------------------------------\n""" % datetime.datetime.now()
+        pretty_string = """The following devices were identified as of %s:\n|             Time            |    Device ID    |      Device Name        |\n------------------------------------------------------------------------\n""" % datetime.datetime.now()
         for entry in entries:
             pretty_string += "%s" % entry
         return pretty_string
@@ -88,7 +88,7 @@ class MithrendFrontend():
     def getHTMLPrettyData(self):
         entries = self.pullPosts()
         pretty_string = "The following devices were identified as of %s :\n \
-                        |           Time            |    Device ID  |         Device Name       | \
+                        |           Time            |    Device ID   |         Device Name       | \
                         ------------------------------------------------------------------" % datetime.datetime.now()
         for device in pretty_data:
             pretty_string += "%s" % device
