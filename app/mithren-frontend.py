@@ -55,16 +55,20 @@ class MithrendFrontend():
         command = raw_input("> ")
         return command
 
-    def pullPosts(self):
+    def pullRawPosts(self):
         conn = conninfo.ConnInfo()
         database_connection = databaseconnection.DatabaseConnection(conn)
         database_connection.connect()
         database = database_connection.getDatabase()
         posts = database.posts
-        pretty_data = posts.find()
+        raw_posts = posts.find()
+        return raw_posts
+
+    def pullPosts(self):
+        raw_posts = self.pullRawPosts()
         entries = []
 
-        for post in pretty_data:
+        for post in raw_posts:
             timestamp = post['date']
             did = post['device_id']
             channel = post['channel']
@@ -193,13 +197,18 @@ class MithrendFrontend():
 
         # Send Report
         elif command == "7":
+            "Which format would you prefer?:\n[1] JSON [2] HTML ")
+            sub_command = self.get_input()
+            if sub_command == "1":
+                payload = json.dumps(self.pullRawPosts)
+            elif sub_command == "2"
+                payload = self.getPrettyData()
             emailers = ""
             emailaddrs = ""
             for email in self.config['receiver-emails']:
                 emailers += "%s, " % email['email-name']
                 emailaddrs += "%s, " % email['email-address']
             print "Sending email to %s %s" % ( emailers[:-2], emailaddrs[:-2] )
-            payload = self.getHTMLPrettyData()
             self.email_agent.set_message(payload)
             self.email_agent.send_email()
 
