@@ -64,7 +64,7 @@ class MithrendFrontend():
         posts = database.posts
         raw_posts = posts.find()
         less_raw_posts = []
-        for post in raw_posts
+        for post in raw_posts:
             less_raw_posts.append(post)
         return raw_posts, less_raw_posts
 
