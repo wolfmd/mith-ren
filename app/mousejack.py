@@ -19,8 +19,8 @@ class Mousejack(mithorenmodule.Mithorenmodule):
         elif "2D" in mfg_string:
             mfg = "Logitech"
         else:
-            mfg = "Unknown"
-        return mfg_guess
+            mfg = "Unknown Unifier"
+        return mfg
 
     # Mousejack-specific
     def capture(self, command, file):
