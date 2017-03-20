@@ -16,11 +16,14 @@ class Mousejack(mithorenmodule.Mithorenmodule):
         mfg_string = id.split(':')[0]
         if "5A" in mfg_string:
             mfg = "Dell"
+	    model = "KM714"
         elif "2D" in mfg_string:
-            mfg = "Logitech"
+            mfg = "Microsoft"
+	    model = "850"
         else:
-            mfg = "Unknown Unifier"
-        return mfg
+            mfg = "Logitech"
+	    model = "K360"
+        return mfg, model
 
     # Mousejack-specific
     def capture(self, command, file):
@@ -59,13 +62,13 @@ class Mousejack(mithorenmodule.Mithorenmodule):
             #[2016-11-11 05:25:02.489]  80   5  9A:45:0A:44:47  85:02:48:A9:4B
                 if self.isTarget(line):
                     self.logger.info("Found a target: %s" % line)
-                    mfg_guess = self.guessmfg(line)
+                    mfg_guess, model_guess = self.guessmfg(line)
                     post = {"date" : datetime.datetime.now(),
-                            "device_id" : line.split(' ')[3],
-                            "channel" : line.split(' ')[1],
+                            "device_id" : line.split('  ')[3],
+                            "channel" : line.split('  ')[1],
                             "manufacturer" : mfg_guess,
-                            "model" : "Unknown",
-                            "messages" : [line.split(' ')[4]]
+                            "model" : model_guess,
+                            "messages" : [line.split('  ')[4]]
                             }
                     post_id = posts.insert_one(post).inserted_id
                     self.logger.info("Inserted a line with post ID %s" % post_id)
