@@ -11,6 +11,8 @@ import sys
 import emailagent, databaseconnection, conninfo
 import logging
 import yaml
+from bson import Binary, Code
+from bson.json_util import dumps
 
 class MithrendFrontend():
 
@@ -206,9 +208,9 @@ class MithrendFrontend():
             sub_command = self.get_input()
             if sub_command == "1":
                 raw_posts, less_raw_posts = self.pullRawPosts()
-                payload = json.dumps(less_raw_posts)
+                payload = dumps(less_raw_posts)
             elif sub_command == "2":
-                payload = self.getPrettyData()
+                payload = "This is a report triggered by the Mithren Wireless Peripheral Analysis Suite. Learn more at github.com/wolfmd/mithren.\n%s" % self.getPrettyData()
             emailers = ""
             emailaddrs = ""
             for email in self.config['receiver-emails']:
