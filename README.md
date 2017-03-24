@@ -3,6 +3,7 @@ An extensible platform for wireless peripheral keystroke sniffing for microcompu
 
 ## Overview
 ![alt tag](https://raw.githubusercontent.com/wolfmd/mith-ren/master/mithren_logo.png)
+
 The purpose of this project is to provide for simple, extensible, human-readable interfacing with wireless peripheral sniffing. By combing a suite of existing tools into a simple set of commands, this platform makes penetration testing and device reconnaissance compact.
 
 mithören was developed as the senior design project of Michael Wolf and Colin Buckles for the University of Cincinnati's School of Information Technology. It was presented on April 11th, 2017 at the 2017 UC IT Expo. The slide deck can be viewed at wolfmd.me/docs/mithren.pdf.
