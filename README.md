@@ -4,9 +4,9 @@ An extensible platform for wireless peripheral keystroke sniffing for microcompu
 ## Overview
 ![alt tag](https://raw.githubusercontent.com/wolfmd/mith-ren/master/mithren_logo.png)
 
-The purpose of this project is to provide for simple, extensible, human-readable interfacing with wireless peripheral sniffing. By combing a suite of existing tools into a simple set of commands, this platform makes penetration testing and device reconnaissance compact.
+The purpose of this project is to provide for simple, extensible, human-readable interfacing with wireless peripheral sniffing. By combing a suite of existing tools into a simple set of commands, this platform makes penetration testing and device reconnaissance compact. This set of tools is configured to run on a Raspberry Pi or other microcomputer
 
-mithören was developed as the senior design project of Michael Wolf and Colin Buckles for the University of Cincinnati's School of Information Technology. It was presented on April 11th, 2017 at the 2017 UC IT Expo. The slide deck can be viewed at wolfmd.me/docs/mithren.pdf.
+mithören was developed as the senior design project of Michael Wolf and Colin Buckles for the University of Cincinnati's School of Information Technology. It was presented on April 11th, 2017 at the 2017 UC IT Expo. The slide deck can be viewed at (wolfmd.me/docs/mithren.pdf).
 
 This project is licensed under GPL v3.
 
@@ -24,8 +24,7 @@ mithören currently supports:
   - [ ] KeyKeriki
   - [ ] GNU Radio
 
-mithören currently exports reports in:
-  1. Email
+mithören currently exports reports as emails in the following formats:
     - Plaintext
     - JSON
 
@@ -36,12 +35,14 @@ The application can be run immediately given the proper hardware. Modules genera
     - Both the teensy and the Crazy Radio PA work, however the range on the teensy is quite limited
 
 ### To utilize the full-system image:
- - Flash image file under 'image' onto an SD-card
+ - Flash image file under 'image' onto an SD-card. This image is best utilized by a microcomputer
 
 ### For the standalone application:
+Configure a simple mongodb database and edit the conninfo.py and databaseconnection.py files to match the parameters of database name, database host, username and password.
+
 ```
 cd app/
-python mithren-frontend.py
+sudo python mithren-frontend.py
 ```
 
 ### Daemonization:
@@ -50,3 +51,8 @@ python mithren-frontend.py
 ## Support
 Any questions or comments can be sent to:
 michael@nullbrook.org
+
+## //TODO
+- Implement GPG encryption
+- Develop more modules
+- Instrument more thorough device identification
