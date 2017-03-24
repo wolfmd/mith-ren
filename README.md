@@ -40,6 +40,8 @@ The application can be run immediately given the proper hardware. Modules genera
 ### For the standalone application:
 Configure a simple mongodb database and edit the conninfo.py and databaseconnection.py files to match the parameters of database name, database host, username and password.
 
+Set up postfix on localhost to either route through your big box email or send messages itself
+
 ```
 cd app/
 sudo python mithren-frontend.py
